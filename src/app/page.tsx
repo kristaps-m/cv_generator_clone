@@ -3,39 +3,225 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState<string>("");
-  const [userInputs, setUserInputs] = useState<string[]>([]);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [company, setCompany] = useState("");
+  const [position, setPosition] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [summary, setSummary] = useState("");
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
+  // const [company, setCompany] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
+  const [workExperience, setWorkExperience] = useState<
+    { company: string; jobTitle: string; date: string; description: string }[]
+  >([]); //useState([]);
+
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case "firstName":
+        setFirstName(value);
+        break;
+      case "lastName":
+        setLastName(value);
+        break;
+      case "company":
+        setCompany(value);
+        break;
+      case "position":
+        setPosition(value);
+        break;
+      case "email":
+        setEmail(value);
+        break;
+      case "phone":
+        setPhone(value);
+        break;
+      case "summary":
+        setSummary(value);
+        break;
+      case "jobTitle":
+        setJobTitle(value);
+        break;
+      case "date":
+        setDate(value);
+        break;
+      case "description":
+        setDescription(value);
+        break;
+      default:
+        break;
+    }
   };
 
-  const handleAddInput = () => {
-    if (inputValue.trim() !== "") {
-      setUserInputs((prevInputs) => [...prevInputs, inputValue]);
-      setInputValue("");
+  const handleAddExperience = () => {
+    if (
+      company.trim() !== "" &&
+      jobTitle.trim() !== "" &&
+      date.trim() !== "" &&
+      description.trim() !== ""
+    ) {
+      const experience = { company, jobTitle, date, description };
+      setWorkExperience((prevExperience) => [...prevExperience, experience]);
+      setCompany("");
+      setJobTitle("");
+      setDate("");
+      setDescription("");
     }
   };
 
   return (
     <div>
-      <h1>WAZAAAAAAAAAAAAAAAAAAAAAAP</h1>
+      <h2>CV Generator</h2>
       <div>
+        <label htmlFor="firstName">First Name:</label>
         <input
           type="text"
-          value={inputValue}
+          id="firstName"
+          name="firstName"
+          value={firstName}
           onChange={handleInputChange}
-          placeholder="Enter your input"
+          placeholder="Enter your first name"
         />
-        <button onClick={handleAddInput}>Add</button>
       </div>
       <div>
-        <h3>User Inputs:</h3>
-        <ul>
-          {userInputs.map((input, index) => (
-            <li key={index}>{input}</li>
-          ))}
-        </ul>
+        <label htmlFor="lastName">Last Name:</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          value={lastName}
+          onChange={handleInputChange}
+          placeholder="Enter your last name"
+        />
+      </div>
+      {/* <div>
+        <label htmlFor="company">Company:</label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          value={company}
+          onChange={handleInputChange}
+          placeholder="Enter your company name"
+        />
+      </div> */}
+      <div>
+        <label htmlFor="position">Position:</label>
+        <input
+          type="text"
+          id="position"
+          name="position"
+          value={position}
+          onChange={handleInputChange}
+          placeholder="Enter your position"
+        />
+      </div>
+      <div>
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={email}
+          onChange={handleInputChange}
+          placeholder="Enter your email"
+        />
+      </div>
+      <div>
+        <label htmlFor="phone">Phone:</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          value={phone}
+          onChange={handleInputChange}
+          placeholder="Enter your phone number"
+        />
+      </div>
+      <div>
+        <label htmlFor="summary">Summary:</label>
+        <textarea
+          id="summary"
+          name="summary"
+          value={summary}
+          onChange={handleInputChange}
+          placeholder="Enter a summary about yourself"
+        />
+      </div>
+      <br></br>
+      {/* Work Experience */}
+      <div>
+        <h3>Work Experience</h3>
+        <div>
+          <label htmlFor="company">Company:</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            value={company}
+            onChange={handleInputChange}
+            placeholder="Enter company name"
+          />
+        </div>
+        <div>
+          <label htmlFor="jobTitle">Job Title:</label>
+          <input
+            type="text"
+            id="jobTitle"
+            name="jobTitle"
+            value={jobTitle}
+            onChange={handleInputChange}
+            placeholder="Enter job title"
+          />
+        </div>
+        <div>
+          <label htmlFor="date">Date:</label>
+          <input
+            type="text"
+            id="date"
+            name="date"
+            value={date}
+            onChange={handleInputChange}
+            placeholder="Enter date"
+          />
+        </div>
+        <div>
+          <label htmlFor="description">Description:</label>
+          <textarea
+            id="description"
+            name="description"
+            value={description}
+            onChange={handleInputChange}
+            placeholder="Enter job description"
+          />
+        </div>
+        <button onClick={handleAddExperience}>Add Experience</button>
+      </div>
+      <br></br>
+      <div>
+        <h3>Generated CV:</h3>
+        <p>
+          Name: {firstName} {lastName}
+        </p>
+        <p>Position: {position}</p>
+        <p>Email: {email}</p>
+        <p>Phone: {phone}</p>
+        <p>Summary: {summary}</p>
+      </div>
+      <div>
+        <h3>Work Experience</h3>
+        <p>Company: {company}</p>
+        <p>Job Title: {jobTitle}</p>
+        <p>Date: {date}</p>
+        <p>Description: {description}</p>
       </div>
     </div>
   );
