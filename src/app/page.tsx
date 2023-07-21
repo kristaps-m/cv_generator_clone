@@ -1,6 +1,21 @@
 "use client";
+import axios from 'axios';
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
+
+const generatePDF = async () => {
+  try {
+    const response = await axios.post('/api/generate-pdf', { // put this file to cool folder
+      html: '<html><body><h1>Hello, PDF!</h1></body></html>', // Replace this with your actual HTML content
+    });
+
+    const blob = new Blob([response.data], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    window.open(url);
+  } catch (error) {
+    console.error('Error generating PDF:', error);
+  }
+};
 
 export default function Home() {
   const [firstName, setFirstName] = useState("");
@@ -247,6 +262,7 @@ export default function Home() {
         {/* <button onClick={handleAddInput}>Add Input</button> */}
       </div>
       <p>------------------------------------</p>
+      <button onClick={generatePDF}>Generate PDF</button>
     </div>
   );
 }
