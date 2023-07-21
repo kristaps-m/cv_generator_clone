@@ -2,13 +2,17 @@
 import axios from 'axios';
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
+//import type { NextPage } from 'next'
+//import Page from '../components/Page'
+
+const HTML_EXAMPLE = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'>  <meta http-equiv='X-UA-Compatible' content='ie=edge'>    <title>My Website</title>    <link rel='stylesheet' href='./style.css'>    <link rel='icon' href='./favicon.ico' type='image/x-icon'>  </head>  <body>    <main>        <h1>Welcome to My Website</h1>      </main>	<script src='index.js'></script>  </body></html>"
 
 const generatePDF = async () => {
   try {
     const response = await axios.post('/api/generate-pdf', { // put this file to cool folder
-      html: '<html><body><h1>Hello, PDF!</h1></body></html>', // Replace this with your actual HTML content
+      html: HTML_EXAMPLE, // Replace this with your actual HTML content
     });
-
+    // '<html><body><h1>Hello, PDF!</h1></body></html>'
     const blob = new Blob([response.data], { type: 'application/pdf' });
     const url = URL.createObjectURL(blob);
     window.open(url);
