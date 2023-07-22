@@ -1,11 +1,13 @@
 "use client";
-import axios from "axios";
-import Image from "next/image";
+// import axios from "axios";
+// import Image from "next/image";
 import { useRef } from "react";
 import { ChangeEvent, useState } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+import { Icon } from "@progress/kendo-react-common";
+//import WorkIcon from "@mui/icons-material/Work";
 
 export default function Home() {
   const [firstName, setFirstName] = useState("");
@@ -13,12 +15,9 @@ export default function Home() {
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
   const [email, setEmail] = useState("");
+  const [linkedIn, setLinkedIn] = useState("");
   const [phone, setPhone] = useState("");
   const [summary, setSummary] = useState("");
-
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [company, setCompany] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
@@ -60,6 +59,9 @@ export default function Home() {
         break;
       case "description":
         setDescription(value);
+        break;
+      case "linkedIn":
+        setLinkedIn(value);
         break;
       default:
         break;
@@ -160,6 +162,17 @@ export default function Home() {
                   />
                 </div>
                 <div>
+                  <label htmlFor="linkedIn">LinkedIn:</label>
+                  <input
+                    type="text"
+                    id="linkedIn"
+                    name="linkedIn"
+                    value={linkedIn}
+                    onChange={handleInputChange}
+                    placeholder="Enter your LinkedIn"
+                  />
+                </div>
+                <div>
                   <label htmlFor="summary">Summary:</label>
                   <textarea
                     id="summary"
@@ -171,6 +184,7 @@ export default function Home() {
                 </div>
                 <br></br>
                 {/* Work Experience */}
+                <span className="k-icon k-i-wrench"></span>
                 <h3>Work Experience</h3>
                 <div>
                   <label htmlFor="company">Company:</label>
@@ -226,6 +240,9 @@ export default function Home() {
                     <p>Position: {position}</p>
                     <p>Email: {email}</p>
                     <p>Phone: {phone}</p>
+                    <p>
+                      {<Icon name="linkedin" />} LinkedIn: {linkedIn}
+                    </p>
                     <p>Summary: {summary}</p>
                   </div>
                   <br></br>
