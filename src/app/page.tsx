@@ -1,6 +1,10 @@
 "use client";
 import Image from "next/image";
+import { useRef } from "react";
 import { ChangeEvent, useState } from "react";
+import "@progress/kendo-theme-material/dist/all.css";
+import { Button } from "@progress/kendo-react-buttons";
+import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 
 export default function Home() {
   const [firstName, setFirstName] = useState("");
@@ -75,6 +79,13 @@ export default function Home() {
       setDate("");
       setDescription("");
     }
+  };
+
+  const pdfExportComponent = useRef(null);
+
+  const handleExportWithComponent = (event: any) => {
+    console.log("I clicked to export PDF");
+    pdfExportComponent.current.save();
   };
 
   return (
@@ -205,24 +216,26 @@ export default function Home() {
                 </div>
               </td>
               <td>
-                <div>
-                  <h3>Generated CV:</h3>
-                  <p>
-                    Name: {firstName} {lastName}
-                  </p>
-                  <p>Position: {position}</p>
-                  <p>Email: {email}</p>
-                  <p>Phone: {phone}</p>
-                  <p>Summary: {summary}</p>
-                </div>
-                <br></br>
-                <div>
-                  <h3>Work Experience</h3>
-                  <p>Company: {company}</p>
-                  <p>Job Title: {jobTitle}</p>
-                  <p>Date: {date}</p>
-                  <p>Description: {description}</p>
-                </div>
+                <PDFExport ref={pdfExportComponent} paperSize="A4">
+                  <div>
+                    <h3>Generated CV:</h3>
+                    <p>
+                      Name: {firstName} {lastName}
+                    </p>
+                    <p>Position: {position}</p>
+                    <p>Email: {email}</p>
+                    <p>Phone: {phone}</p>
+                    <p>Summary: {summary}</p>
+                  </div>
+                  <br></br>
+                  <div>
+                    <h3>Work Experience</h3>
+                    <p>Company: {company}</p>
+                    <p>Job Title: {jobTitle}</p>
+                    <p>Date: {date}</p>
+                    <p>Description: {description}</p>
+                  </div>
+                </PDFExport>
               </td>
             </tr>
             <tr>
@@ -247,6 +260,12 @@ export default function Home() {
         {/* <button onClick={handleAddInput}>Add Input</button> */}
       </div>
       <p>------------------------------------</p>
+      <div className="button-area">
+        <Button themeColor={"primary"} onClick={handleExportWithComponent}>
+          Primary Button
+        </Button>
+        <Button>Default Button</Button>
+      </div>
     </div>
   );
 }
