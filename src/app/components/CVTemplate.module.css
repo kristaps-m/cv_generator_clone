@@ -1,0 +1,50 @@
+.cv {
+  font-family: "Roboto", sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.cv_header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cv_header h1 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.cv_header p {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.cv_section {
+  margin-bottom: 20px;
+}
+
+.cv_h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.infoItem,
+.educationItem,
+.workItem {
+  margin-bottom: 10px;
+}
+
+.infoItem span {
+  font-weight: 700;
+}
+
+.educationItem h3,
+.workItem h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}

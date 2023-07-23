@@ -71,7 +71,7 @@ export default function Home() {
                   {/* {(cvData.lastName = lastName)} */}
                 </div>
                 <div>
-                  <label htmlFor="position">Position:</label>
+                  <label htmlFor="position">Position / Profession:</label>
                   <input
                     type="text"
                     id="position"
