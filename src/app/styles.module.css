@@ -1,4 +1,4 @@
-/* styles/Page.module.css */
+/* styles.module.css */
 
 .page {
     margin: auto; /* centers element within parent container */
@@ -19,3 +19,13 @@
     size: A4;
     margin: 0;
   }
+
+.templateA {
+  color: blue;
+  font-size: 18px;
+}
+
+.templateB {
+  color: red;
+  font-size: 18px;
+}

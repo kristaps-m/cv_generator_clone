@@ -7,6 +7,7 @@ import "@progress/kendo-theme-material/dist/all.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import { Icon } from "@progress/kendo-react-common";
+import TemplateSelector from "./components/TemplateSelector";
 //import WorkIcon from "@mui/icons-material/Work";
 
 export default function Home() {
@@ -89,6 +90,20 @@ export default function Home() {
   const handleExportWithComponent = (event: any) => {
     console.log("I clicked to export PDF");
     pdfExportComponent.current.save();
+  };
+
+  const cvData = {
+    firstName: "John",
+    lastName: "Doe",
+    position: "Software Developer",
+    email: "john.doe@example.com",
+    phone: "123-456-7890",
+    linkedIn: "linkedin.com/in/johndoe",
+    summary: "Experienced software developer with a passion for coding.",
+    company: "ABC Inc.",
+    jobTitle: "Full-stack Developer",
+    date: "January 2022 - Present",
+    description: "Worked on various projects...",
   };
 
   return (
@@ -232,6 +247,11 @@ export default function Home() {
               </td>
               <td>
                 <PDFExport ref={pdfExportComponent} paperSize="A4">
+                  <div>
+                    <h1>CV Preview</h1>
+                    <TemplateSelector data={cvData} />
+                  </div>
+                  <br></br>
                   <div>
                     <h3>Generated CV:</h3>
                     <p>
