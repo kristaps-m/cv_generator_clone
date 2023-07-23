@@ -249,6 +249,11 @@ export default function Home() {
                 <PDFExport ref={pdfExportComponent} paperSize="A4">
                   <div>
                     <h1>CV Preview</h1>
+                    {
+                      ((cvData.firstName = firstName),
+                      (cvData.lastName = lastName),
+                      (cvData.email = email))
+                    }
                     <TemplateSelector data={cvData} />
                   </div>
                   <br></br>
