@@ -4,106 +4,31 @@
 import { useRef } from "react";
 import { ChangeEvent, useState } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
-import { Button } from "@progress/kendo-react-buttons";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
-import { Icon } from "@progress/kendo-react-common";
 import TemplateSelector from "./components/TemplateSelector";
-//import WorkIcon from "@mui/icons-material/Work";
+import React from "react";
 
 export default function Home() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [company, setCompany] = useState("");
-  const [position, setPosition] = useState("");
-  const [email, setEmail] = useState("");
-  const [linkedIn, setLinkedIn] = useState("");
-  const [phone, setPhone] = useState("");
-  const [summary, setSummary] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [description, setDescription] = useState("");
-  const [workExperience, setWorkExperience] = useState<
-    { company: string; jobTitle: string; date: string; description: string }[]
-  >([]); //useState([]);
+  const [cvData, setCvData] = React.useState({
+    firstName: "",
+    lastName: "",
+    position: "",
+    email: "",
+    phone: "",
+    linkedIn: "",
+    summary: "",
+    company: "",
+    jobTitle: "",
+    date: "",
+    description: "",
+  });
 
-  const handleInputChange = (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const { name, value } = event.target;
-    switch (name) {
-      case "firstName":
-        setFirstName(value);
-        break;
-      case "lastName":
-        setLastName(value);
-        break;
-      case "company":
-        setCompany(value);
-        break;
-      case "position":
-        setPosition(value);
-        break;
-      case "email":
-        setEmail(value);
-        break;
-      case "phone":
-        setPhone(value);
-        break;
-      case "summary":
-        setSummary(value);
-        break;
-      case "jobTitle":
-        setJobTitle(value);
-        break;
-      case "date":
-        setDate(value);
-        break;
-      case "description":
-        setDescription(value);
-        break;
-      case "linkedIn":
-        setLinkedIn(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleAddExperience = () => {
-    if (
-      company.trim() !== "" &&
-      jobTitle.trim() !== "" &&
-      date.trim() !== "" &&
-      description.trim() !== ""
-    ) {
-      const experience = { company, jobTitle, date, description };
-      setWorkExperience((prevExperience) => [...prevExperience, experience]);
-      setCompany("");
-      setJobTitle("");
-      setDate("");
-      setDescription("");
-    }
-  };
-
-  const pdfExportComponent = useRef(null);
-
-  const handleExportWithComponent = (event: any) => {
-    console.log("I clicked to export PDF");
-    pdfExportComponent.current.save();
-  };
-
-  const cvData = {
-    firstName: "John",
-    lastName: "Doe",
-    position: "Software Developer",
-    email: "john.doe@example.com",
-    phone: "123-456-7890",
-    linkedIn: "linkedin.com/in/johndoe",
-    summary: "Experienced software developer with a passion for coding.",
-    company: "ABC Inc.",
-    jobTitle: "Full-stack Developer",
-    date: "January 2022 - Present",
-    description: "Worked on various projects...",
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCvData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   return (
@@ -127,10 +52,11 @@ export default function Home() {
                     type="text"
                     id="firstName"
                     name="firstName"
-                    value={firstName}
+                    value={cvData.firstName}
                     onChange={handleInputChange}
                     placeholder="Enter your first name"
                   />
+                  {/* {(cvData.firstName = firstName)} */}
                 </div>
                 <div>
                   <label htmlFor="lastName">Last Name:</label>
@@ -138,10 +64,11 @@ export default function Home() {
                     type="text"
                     id="lastName"
                     name="lastName"
-                    value={lastName}
+                    value={cvData.lastName}
                     onChange={handleInputChange}
                     placeholder="Enter your last name"
                   />
+                  {/* {(cvData.lastName = lastName)} */}
                 </div>
                 <div>
                   <label htmlFor="position">Position:</label>
@@ -149,7 +76,7 @@ export default function Home() {
                     type="text"
                     id="position"
                     name="position"
-                    value={position}
+                    value={cvData.position}
                     onChange={handleInputChange}
                     placeholder="Enter your position"
                   />
@@ -160,7 +87,7 @@ export default function Home() {
                     type="email"
                     id="email"
                     name="email"
-                    value={email}
+                    value={cvData.email}
                     onChange={handleInputChange}
                     placeholder="Enter your email"
                   />
@@ -171,7 +98,7 @@ export default function Home() {
                     type="tel"
                     id="phone"
                     name="phone"
-                    value={phone}
+                    value={cvData.phone}
                     onChange={handleInputChange}
                     placeholder="Enter your phone number"
                   />
@@ -182,7 +109,7 @@ export default function Home() {
                     type="text"
                     id="linkedIn"
                     name="linkedIn"
-                    value={linkedIn}
+                    value={cvData.linkedIn}
                     onChange={handleInputChange}
                     placeholder="Enter your LinkedIn"
                   />
@@ -192,7 +119,7 @@ export default function Home() {
                   <textarea
                     id="summary"
                     name="summary"
-                    value={summary}
+                    value={cvData.summary}
                     onChange={handleInputChange}
                     placeholder="Enter a summary about yourself"
                   />
@@ -207,7 +134,7 @@ export default function Home() {
                     type="text"
                     id="company"
                     name="company"
-                    value={company}
+                    value={cvData.company}
                     onChange={handleInputChange}
                     placeholder="Enter company name"
                   />
@@ -218,7 +145,7 @@ export default function Home() {
                     type="text"
                     id="jobTitle"
                     name="jobTitle"
-                    value={jobTitle}
+                    value={cvData.jobTitle}
                     onChange={handleInputChange}
                     placeholder="Enter job title"
                   />
@@ -229,7 +156,7 @@ export default function Home() {
                     type="text"
                     id="date"
                     name="date"
-                    value={date}
+                    value={cvData.date}
                     onChange={handleInputChange}
                     placeholder="Enter date"
                   />
@@ -239,26 +166,27 @@ export default function Home() {
                   <textarea
                     id="description"
                     name="description"
-                    value={description}
+                    value={cvData.description}
                     onChange={handleInputChange}
                     placeholder="Enter job description"
                   />
                 </div>
               </td>
               <td>
-                <PDFExport ref={pdfExportComponent} paperSize="A4">
-                  <div>
-                    <h1>CV Preview</h1>
+                <div>
+                  <h1>CV Preview</h1>
+                  {/* <script>
                     {
                       ((cvData.firstName = firstName),
                       (cvData.lastName = lastName),
                       (cvData.email = email))
                     }
-                    <TemplateSelector data={cvData} />
-                  </div>
-                  <br></br>
-                  <div>
-                    <h3>Generated CV:</h3>
+                  </script> */}
+                </div>
+                <br></br>
+                <h3>CV</h3>
+                <TemplateSelector data={cvData} />
+                {/* <div>
                     <p>
                       Name: {firstName} {lastName}
                     </p>
@@ -277,8 +205,7 @@ export default function Home() {
                     <p>Job Title: {jobTitle}</p>
                     <p>Date: {date}</p>
                     <p>Description: {description}</p>
-                  </div>
-                </PDFExport>
+                  </div> */}
               </td>
             </tr>
             <tr>
@@ -303,12 +230,6 @@ export default function Home() {
         {/* <button onClick={handleAddInput}>Add Input</button> */}
       </div>
       <p>------------------------------------</p>
-      <div className="button-area">
-        <Button themeColor={"primary"} onClick={handleExportWithComponent}>
-          Primary Button
-        </Button>
-        <Button>Default Button</Button>
-      </div>
     </div>
   );
 }

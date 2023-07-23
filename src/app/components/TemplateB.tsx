@@ -1,7 +1,10 @@
 // components/TemplateB.tsx
 import React from "react";
+import { useRef } from "react";
 import { Icon } from "@progress/kendo-react-common";
 import styles from "../styles.module.css";
+import { Button } from "@progress/kendo-react-buttons";
+import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 
 interface TemplateBProps {
   data: {
@@ -34,29 +37,44 @@ const TemplateB: React.FC<TemplateBProps> = ({ data }) => {
     description,
   } = data;
 
+  const pdfExportComponent = useRef(null);
+
+  const handleExportWithComponent = (event: any) => {
+    console.log("I clicked to export PDF");
+    pdfExportComponent.current.save();
+  };
+
   return (
     <div>
-      <h1 className={styles.templateB}>TEMPLATE -A-</h1>
-      <div>
-        <h3 className={styles.templateB}>Generated CV:</h3>
-        <p>
-          Name: {firstName} {lastName}
-        </p>
-        <p className={styles.templateB}>Position: {position}</p>
-        <p>Email: {email}</p>
-        <p>Phone: {phone}</p>
-        <p>
-          {<Icon name="linkedin" />} LinkedIn: {linkedIn}
-        </p>
-        <p>Summary: {summary}</p>
-      </div>
-      <br></br>
-      <div>
-        <h3>Work Experience</h3>
-        <p>Company: {company}</p>
-        <p>Job Title: {jobTitle}</p>
-        <p>Date: {date}</p>
-        <p>Description: {description}</p>
+      <PDFExport ref={pdfExportComponent} paperSize="A4">
+        <h1 className={styles.templateB}>TEMPLATE -A-</h1>
+        <div>
+          <h3 className={styles.templateB}>CV</h3>
+          <p>
+            Name: {firstName} {lastName}
+          </p>
+          <p className={styles.templateB}>Position: {position}</p>
+          <p>Email: {email}</p>
+          <p>Phone: {phone}</p>
+          <p>
+            {<Icon name="linkedin" />} LinkedIn: {linkedIn}
+          </p>
+          <p>Summary: {summary}</p>
+        </div>
+        <br></br>
+        <div>
+          <h3>Work Experience</h3>
+          <p>Company: {company}</p>
+          <p>Job Title: {jobTitle}</p>
+          <p>Date: {date}</p>
+          <p>Description: {description}</p>
+        </div>
+      </PDFExport>
+      <div className="button-area">
+        <Button themeColor={"primary"} onClick={handleExportWithComponent}>
+          Primary Button
+        </Button>
+        <Button>Default Button</Button>
       </div>
     </div>
   );
