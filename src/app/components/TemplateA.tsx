@@ -13,9 +13,11 @@ interface TemplateAProps {
     firstName: string;
     lastName: string;
     position: string;
+    yearsOfExperience: string;
     email: string;
     phone: string;
     linkedIn: string;
+    location: string;
     summary: string;
     company: string;
     jobTitle: string;
@@ -29,9 +31,11 @@ const TemplateA: React.FC<TemplateAProps> = ({ data }) => {
     firstName,
     lastName,
     position,
+    yearsOfExperience,
     email,
     phone,
     linkedIn,
+    location,
     summary,
     company,
     jobTitle,
@@ -77,6 +81,7 @@ const TemplateA: React.FC<TemplateAProps> = ({ data }) => {
                 {firstName} {lastName}
               </h1>
               <p>{position}</p>
+              <p>Experience: {yearsOfExperience} years</p>
             </header>
             <section className={stylesCV.cv_section}>
               <h2>Personal Information</h2>
@@ -88,6 +93,9 @@ const TemplateA: React.FC<TemplateAProps> = ({ data }) => {
               </div>
               <div className={stylesCV.infoItem}>
                 <span>LinkedIn:</span> <span>{linkedIn}</span>
+              </div>
+              <div className={stylesCV.infoItem}>
+                <span>Location:</span> <span>{location}</span>
               </div>
             </section>
             <section className={stylesCV.cv_section}>

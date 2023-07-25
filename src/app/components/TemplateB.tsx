@@ -11,9 +11,11 @@ interface TemplateBProps {
     firstName: string;
     lastName: string;
     position: string;
+    yearsOfExperience: string;
     email: string;
     phone: string;
     linkedIn: string;
+    location: string;
     summary: string;
     company: string;
     jobTitle: string;
@@ -27,9 +29,11 @@ const TemplateB: React.FC<TemplateBProps> = ({ data }) => {
     firstName,
     lastName,
     position,
+    yearsOfExperience,
     email,
     phone,
     linkedIn,
+    location,
     summary,
     company,
     jobTitle,

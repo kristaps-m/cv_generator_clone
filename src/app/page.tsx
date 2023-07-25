@@ -2,21 +2,34 @@
 // import axios from "axios";
 // import Image from "next/image";
 import { useRef } from "react";
+import { styled } from "@mui/material/styles";
 import { ChangeEvent, useState } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import TemplateSelector from "./components/TemplateSelector";
 import React from "react";
 import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({
-    firstName: "Bob",
+    firstName: "",
     lastName: "",
     position: "",
+    yearsOfExperience: "",
     email: "",
     phone: "",
     linkedIn: "",
+    location: "",
     summary: "",
     company: "",
     jobTitle: "",
@@ -47,16 +60,95 @@ export default function Home() {
           <tbody>
             <tr>
               <td>
-                <TextField
-                  // id="standard-read-only-input"
-                  id="standard-read-only-input"
-                  label="First Name"
-                  name="firstName"
-                  value={cvData.firstName}
-                  // defaultValue="Bob"
-                  onChange={handleInputChange}
-                  variant="standard"
-                />
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <TextField
+                      id="fullWidth"
+                      label="First Name"
+                      name="firstName"
+                      value={cvData.firstName}
+                      onChange={handleInputChange}
+                      variant="standard"
+                      placeholder="Enter your first name"
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      id="fullWidth"
+                      label="Last Name"
+                      name="lastName"
+                      value={cvData.lastName}
+                      onChange={handleInputChange}
+                      variant="standard"
+                      placeholder="Enter your last name"
+                    />
+                  </Grid>
+                  <Grid item xs={8}>
+                    <TextField
+                      fullWidth
+                      id="fullWidth"
+                      label="Profession"
+                      name="position"
+                      value={cvData.position}
+                      onChange={handleInputChange}
+                      variant="standard"
+                      placeholder="Enter your profession"
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <TextField
+                      id="fullWidth"
+                      label="Years Of Experience"
+                      name="yearsOfExperience"
+                      value={cvData.yearsOfExperience}
+                      onChange={handleInputChange}
+                      variant="standard"
+                      placeholder="Enter your experience"
+                    />
+                  </Grid>
+                  <Grid item xs={8}>
+                    <TextField
+                      fullWidth
+                      id="fullWidth"
+                      label="E-mail"
+                      name="email"
+                      value={cvData.email}
+                      onChange={handleInputChange}
+                      variant="standard"
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <TextField
+                      id="fullWidth"
+                      label="Mobile phone"
+                      name="phone"
+                      value={cvData.phone}
+                      onChange={handleInputChange}
+                      variant="standard"
+                    />
+                  </Grid>
+                  <Grid item xs={8}>
+                    <TextField
+                      fullWidth
+                      id="fullWidth"
+                      label="LinkedIn"
+                      name="linkedIn"
+                      value={cvData.linkedIn}
+                      onChange={handleInputChange}
+                      variant="standard"
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <TextField
+                      id="fullWidth"
+                      label="Location"
+                      name="location"
+                      value={cvData.location}
+                      onChange={handleInputChange}
+                      variant="standard"
+                    />
+                  </Grid>
+                </Grid>
                 {/* <div>
                   <label htmlFor="firstName">First Name:</label>
                   <input
