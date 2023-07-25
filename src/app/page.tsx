@@ -7,10 +7,11 @@ import "@progress/kendo-theme-material/dist/all.css";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import TemplateSelector from "./components/TemplateSelector";
 import React from "react";
+import TextField from "@mui/material/TextField";
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({
-    firstName: "",
+    firstName: "Bob",
     lastName: "",
     position: "",
     email: "",
@@ -46,7 +47,17 @@ export default function Home() {
           <tbody>
             <tr>
               <td>
-                <div>
+                <TextField
+                  // id="standard-read-only-input"
+                  id="standard-read-only-input"
+                  label="First Name"
+                  name="firstName"
+                  value={cvData.firstName}
+                  // defaultValue="Bob"
+                  onChange={handleInputChange}
+                  variant="standard"
+                />
+                {/* <div>
                   <label htmlFor="firstName">First Name:</label>
                   <input
                     type="text"
@@ -56,8 +67,7 @@ export default function Home() {
                     onChange={handleInputChange}
                     placeholder="Enter your first name"
                   />
-                  {/* {(cvData.firstName = firstName)} */}
-                </div>
+                </div> */}
                 <div>
                   <label htmlFor="lastName">Last Name:</label>
                   <input
