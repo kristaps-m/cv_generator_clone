@@ -11,6 +11,7 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import { Button } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -36,6 +37,41 @@ export default function Home() {
     date: "",
     description: "",
   });
+
+  // ---------------------------- WORK EXP
+  const [workExperiences, setWorkExperiences] = useState([
+    {
+      company: "",
+      jobTitle: "",
+      date: "",
+      description: "",
+    },
+  ]);
+
+  const handleWorkExperienceChange = (index: any, event: any) => {
+    const { name, value } = event.target;
+    setWorkExperiences((prevWorkExperiences) => {
+      const updatedExperiences = [...prevWorkExperiences];
+      updatedExperiences[index] = {
+        ...updatedExperiences[index],
+        [name]: value,
+      };
+      return updatedExperiences;
+    });
+  };
+
+  const handleAddWorkExperience = () => {
+    setWorkExperiences((prevWorkExperiences) => [
+      ...prevWorkExperiences,
+      {
+        company: "",
+        jobTitle: "",
+        date: "",
+        description: "",
+      },
+    ]);
+  };
+  // ---------------------------- WORK EXP ^^
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -149,83 +185,73 @@ export default function Home() {
                     />
                   </Grid>
                 </Grid>
-                {/* <div>
-                  <label htmlFor="firstName">First Name:</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={cvData.firstName}
-                    onChange={handleInputChange}
-                    placeholder="Enter your first name"
-                  />
-                </div> */}
-                <div>
-                  <label htmlFor="lastName">Last Name:</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={cvData.lastName}
-                    onChange={handleInputChange}
-                    placeholder="Enter your last name"
-                  />
-                  {/* {(cvData.lastName = lastName)} */}
-                </div>
-                <div>
-                  <label htmlFor="position">Position / Profession:</label>
-                  <input
-                    type="text"
-                    id="position"
-                    name="position"
-                    value={cvData.position}
-                    onChange={handleInputChange}
-                    placeholder="Enter your position"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email">Email:</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={cvData.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter your email"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone">Phone:</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={cvData.phone}
-                    onChange={handleInputChange}
-                    placeholder="Enter your phone number"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="linkedIn">LinkedIn:</label>
-                  <input
-                    type="text"
-                    id="linkedIn"
-                    name="linkedIn"
-                    value={cvData.linkedIn}
-                    onChange={handleInputChange}
-                    placeholder="Enter your LinkedIn"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="summary">Summary:</label>
-                  <textarea
-                    id="summary"
-                    name="summary"
-                    value={cvData.summary}
-                    onChange={handleInputChange}
-                    placeholder="Enter a summary about yourself"
-                  />
-                </div>
+                <br></br>
+                <br></br>
+                <Grid item xs={12}>
+                  <Grid item xs={12}>
+                    <h1>Work Experience:</h1>
+                  </Grid>
+                  {/* Work Experience List */}
+                  {workExperiences.map((experience, index) => (
+                    <div key={index}>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                          <TextField
+                            label="Company"
+                            name="company"
+                            value={experience.company}
+                            onChange={(e) =>
+                              handleWorkExperienceChange(index, e)
+                            }
+                            variant="standard"
+                            fullWidth
+                          />
+                        </Grid>
+                        <Grid item xs={8}>
+                          <TextField
+                            label="Job Title"
+                            name="jobTitle"
+                            value={experience.jobTitle}
+                            onChange={(e) =>
+                              handleWorkExperienceChange(index, e)
+                            }
+                            variant="standard"
+                            fullWidth
+                          />
+                        </Grid>
+                        <Grid item xs={4}>
+                          <TextField
+                            label="Date"
+                            name="date"
+                            value={experience.date}
+                            onChange={(e) =>
+                              handleWorkExperienceChange(index, e)
+                            }
+                            variant="standard"
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            label="Descripion"
+                            name="description"
+                            value={experience.description}
+                            onChange={(e) =>
+                              handleWorkExperienceChange(index, e)
+                            }
+                            variant="standard"
+                            fullWidth
+                          />
+                        </Grid>
+                        <Grid></Grid>
+                        {/* Add other work experience fields here */}
+                      </Grid>
+                    </div>
+                  ))}
+                  {/* Add Button to add more work experiences */}
+                  <Button onClick={handleAddWorkExperience} variant="contained">
+                    Add Work Experience
+                  </Button>
+                </Grid>
                 <br></br>
                 {/* Work Experience */}
                 <span className="k-icon k-i-wrench"></span>
@@ -335,3 +361,83 @@ export default function Home() {
     </div>
   );
 }
+
+/** 
+                <div>
+                  <label htmlFor="firstName">First Name:</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    value={cvData.firstName}
+                    onChange={handleInputChange}
+                    placeholder="Enter your first name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lastName">Last Name:</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    value={cvData.lastName}
+                    onChange={handleInputChange}
+                    placeholder="Enter your last name"
+                  />
+                  {(cvData.lastName = lastName)} 
+                </div>
+                <div>
+                  <label htmlFor="position">Position / Profession:</label>
+                  <input
+                    type="text"
+                    id="position"
+                    name="position"
+                    value={cvData.position}
+                    onChange={handleInputChange}
+                    placeholder="Enter your position"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email">Email:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={cvData.email}
+                    onChange={handleInputChange}
+                    placeholder="Enter your email"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone">Phone:</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={cvData.phone}
+                    onChange={handleInputChange}
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="linkedIn">LinkedIn:</label>
+                  <input
+                    type="text"
+                    id="linkedIn"
+                    name="linkedIn"
+                    value={cvData.linkedIn}
+                    onChange={handleInputChange}
+                    placeholder="Enter your LinkedIn"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="summary">Summary:</label>
+                  <textarea
+                    id="summary"
+                    name="summary"
+                    value={cvData.summary}
+                    onChange={handleInputChange}
+                    placeholder="Enter a summary about yourself"
+                  />
+                </div>
+*/
