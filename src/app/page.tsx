@@ -12,6 +12,7 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -70,6 +71,14 @@ export default function Home() {
         description: "",
       },
     ]);
+  };
+
+  const handleRemoveWorkExperience = (index: number) => {
+    setWorkExperiences((prevWorkExperiences) => {
+      const updatedExperience = [...prevWorkExperiences];
+      updatedExperience.splice(index, 1);
+      return updatedExperience;
+    });
   };
   // ---------------------------- WORK EXP ^^
 
@@ -195,7 +204,7 @@ export default function Home() {
                   {workExperiences.map((experience, index) => (
                     <div key={index}>
                       <Grid container spacing={2}>
-                        <Grid item xs={12}>
+                        <Grid item xs={10}>
                           <TextField
                             label="Company"
                             name="company"
@@ -206,6 +215,14 @@ export default function Home() {
                             variant="standard"
                             fullWidth
                           />
+                        </Grid>
+                        <Grid item xs={2}>
+                          {/* Add a button with a trash can icon to remove the work experience */}
+                          <Button
+                            onClick={() => handleRemoveWorkExperience(index)}
+                          >
+                            <DeleteIcon></DeleteIcon>
+                          </Button>
                         </Grid>
                         <Grid item xs={8}>
                           <TextField
@@ -242,7 +259,6 @@ export default function Home() {
                             fullWidth
                           />
                         </Grid>
-                        <Grid></Grid>
                         {/* Add other work experience fields here */}
                       </Grid>
                     </div>

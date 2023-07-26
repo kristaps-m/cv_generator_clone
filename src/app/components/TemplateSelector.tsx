@@ -8,9 +8,11 @@ interface TemplateSelectorProps {
     firstName: string;
     lastName: string;
     position: string;
+    yearsOfExperience: string;
     email: string;
     phone: string;
     linkedIn: string;
+    location: string;
     summary: string;
     company: string;
     jobTitle: string;
