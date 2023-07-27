@@ -14,14 +14,6 @@ import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-//   ...theme.typography.body2,
-//   padding: theme.spacing(1),
-//   textAlign: "center",
-//   color: theme.palette.text.secondary,
-// }));
-
 export default function Home() {
   const [cvData, setCvData] = React.useState({
     firstName: "",
@@ -33,18 +25,6 @@ export default function Home() {
     linkedIn: "",
     location: "",
     summary: "",
-    // company: "",
-    // jobTitle: "",
-    // date: "",
-    // description: "",
-    // workExperiences: [
-    //   {
-    //     company: "",
-    //     jobTitle: "",
-    //     date: "",
-    //     description: "",
-    //   },
-    // ],
   });
 
   // ---------------------------- WORK EXP
@@ -57,17 +37,6 @@ export default function Home() {
     },
   ]);
 
-  // const handleWorkExperienceChange = (index: any, event: any) => {
-  //   const { name, value } = event.target;
-  //   setWorkExperiences((prevWorkExperiences) => {
-  //     const updatedExperiences = [...prevWorkExperiences];
-  //     updatedExperiences[index] = {
-  //       ...updatedExperiences[index],
-  //       [name]: value,
-  //     };
-  //     return updatedExperiences;
-  //   });
-  // };
   const handleWorkExperienceChange = (
     index: number,
     event: React.ChangeEvent<HTMLInputElement>
@@ -79,28 +48,9 @@ export default function Home() {
         ...updatedExperiences[index],
         [name]: value,
       };
-      setCvData((prevData) => ({
-        ...prevData,
-        workExperiences: updatedExperiences,
-      }));
       return updatedExperiences;
     });
   };
-
-  // const handleWorkExperienceChange = (
-  //   index: number,
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   const { name, value } = event.target;
-  //   setWorkExperiences((prevWorkExperiences) => {
-  //     const updatedExperiences = [...prevWorkExperiences];
-  //     updatedExperiences[index] = {
-  //       ...updatedExperiences[index],
-  //       [name]: value,
-  //     };
-  //     return updatedExperiences;
-  //   });
-  // };
 
   const handleAddWorkExperience = () => {
     setWorkExperiences((prevWorkExperiences) => [
@@ -309,7 +259,7 @@ export default function Home() {
                     </div>
                   ))}
                   {/* Add Button to add more work experiences */}
-                  <Button onClick={handleAddWorkExperience} variant="contained">
+                  <Button onClick={handleAddWorkExperience} color="success">
                     Add Work Experience
                   </Button>
                 </Grid>
@@ -427,83 +377,3 @@ export default function Home() {
     </div>
   );
 }
-
-/** 
-                <div>
-                  <label htmlFor="firstName">First Name:</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={cvData.firstName}
-                    onChange={handleInputChange}
-                    placeholder="Enter your first name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="lastName">Last Name:</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={cvData.lastName}
-                    onChange={handleInputChange}
-                    placeholder="Enter your last name"
-                  />
-                  {(cvData.lastName = lastName)} 
-                </div>
-                <div>
-                  <label htmlFor="position">Position / Profession:</label>
-                  <input
-                    type="text"
-                    id="position"
-                    name="position"
-                    value={cvData.position}
-                    onChange={handleInputChange}
-                    placeholder="Enter your position"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email">Email:</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={cvData.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter your email"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone">Phone:</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={cvData.phone}
-                    onChange={handleInputChange}
-                    placeholder="Enter your phone number"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="linkedIn">LinkedIn:</label>
-                  <input
-                    type="text"
-                    id="linkedIn"
-                    name="linkedIn"
-                    value={cvData.linkedIn}
-                    onChange={handleInputChange}
-                    placeholder="Enter your LinkedIn"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="summary">Summary:</label>
-                  <textarea
-                    id="summary"
-                    name="summary"
-                    value={cvData.summary}
-                    onChange={handleInputChange}
-                    placeholder="Enter a summary about yourself"
-                  />
-                </div>
-*/

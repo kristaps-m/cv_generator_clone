@@ -7,32 +7,9 @@ import stylesCV from "./CVTemplate.module.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import Head from "next/head";
+import ITemplateProps from "./ITemplateProps";
 
-interface TemplateAProps {
-  data: {
-    firstName: string;
-    lastName: string;
-    position: string;
-    yearsOfExperience: string;
-    email: string;
-    phone: string;
-    linkedIn: string;
-    location: string;
-    summary: string;
-    // company: string;
-    // jobTitle: string;
-    // date: string;
-    // description: string;
-    workExperiences: {
-      company: string;
-      jobTitle: string;
-      date: string;
-      description: string;
-    }[];
-  };
-}
-
-const TemplateA: React.FC<TemplateAProps> = ({ data }) => {
+const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
   const {
     firstName,
     lastName,
@@ -130,6 +107,7 @@ const TemplateA: React.FC<TemplateAProps> = ({ data }) => {
                     <p>{`Job Title: ${experience.jobTitle}`}</p>
                     <p>{`Date: ${experience.date}`}</p>
                     <p>{`Description: ${experience.description}`}</p>
+                    <br></br>
                   </div>
                 ))}
               </div>

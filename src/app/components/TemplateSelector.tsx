@@ -2,32 +2,9 @@
 import React, { useState } from "react";
 import TemplateA from "./TemplateA";
 import TemplateB from "./TemplateB";
+import ITemplateProps from "./ITemplateProps";
 
-interface TemplateSelectorProps {
-  data: {
-    firstName: string;
-    lastName: string;
-    position: string;
-    yearsOfExperience: string;
-    email: string;
-    phone: string;
-    linkedIn: string;
-    location: string;
-    summary: string;
-    // company: string;
-    // jobTitle: string;
-    // date: string;
-    // description: string;
-    workExperiences: {
-      company: string;
-      jobTitle: string;
-      date: string;
-      description: string;
-    }[];
-  };
-}
-
-const TemplateSelector: React.FC<TemplateSelectorProps> = ({ data }) => {
+const TemplateSelector: React.FC<ITemplateProps> = ({ data }) => {
   const [selectedTemplate, setSelectedTemplate] = useState("TemplateA");
 
   const handleTemplateChange = (template: string) => {

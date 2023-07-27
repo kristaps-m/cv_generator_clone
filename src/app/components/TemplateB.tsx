@@ -5,32 +5,9 @@ import { Icon } from "@progress/kendo-react-common";
 import styles from "../styles.module.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+import ITemplateProps from "./ITemplateProps";
 
-interface TemplateBProps {
-  data: {
-    firstName: string;
-    lastName: string;
-    position: string;
-    yearsOfExperience: string;
-    email: string;
-    phone: string;
-    linkedIn: string;
-    location: string;
-    summary: string;
-    // company: string;
-    // jobTitle: string;
-    // date: string;
-    // description: string;
-    workExperiences: {
-      company: string;
-      jobTitle: string;
-      date: string;
-      description: string;
-    }[];
-  };
-}
-
-const TemplateB: React.FC<TemplateBProps> = ({ data }) => {
+const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
   const {
     firstName,
     lastName,
