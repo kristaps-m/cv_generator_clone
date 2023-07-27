@@ -14,10 +14,16 @@ interface TemplateSelectorProps {
     linkedIn: string;
     location: string;
     summary: string;
-    company: string;
-    jobTitle: string;
-    date: string;
-    description: string;
+    // company: string;
+    // jobTitle: string;
+    // date: string;
+    // description: string;
+    workExperiences: {
+      company: string;
+      jobTitle: string;
+      date: string;
+      description: string;
+    }[];
   };
 }
 

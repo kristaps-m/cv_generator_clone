@@ -19,10 +19,16 @@ interface TemplateAProps {
     linkedIn: string;
     location: string;
     summary: string;
-    company: string;
-    jobTitle: string;
-    date: string;
-    description: string;
+    // company: string;
+    // jobTitle: string;
+    // date: string;
+    // description: string;
+    workExperiences: {
+      company: string;
+      jobTitle: string;
+      date: string;
+      description: string;
+    }[];
   };
 }
 
@@ -37,10 +43,11 @@ const TemplateA: React.FC<TemplateAProps> = ({ data }) => {
     linkedIn,
     location,
     summary,
-    company,
-    jobTitle,
-    date,
-    description,
+    // company,
+    // jobTitle,
+    // date,
+    // description,
+    workExperiences,
   } = data;
 
   const pdfExportComponent = useRef(null);
@@ -113,10 +120,18 @@ const TemplateA: React.FC<TemplateAProps> = ({ data }) => {
             <section className={stylesCV.cv_section}>
               <h2>Work Experience</h2>
               <div className={stylesCV.workItem}>
-                <h3>{company}</h3>
-                <p>Position: {jobTitle}</p>
-                <p>Duration: {date} - Present</p>
-                <p>Description: {description}</p>
+                {/* <h3>{workExperiences.company}</h3>
+                <p>Position: {workExperiences.jobTitle}</p>
+                <p>Duration: {workExperiences.date} - Present</p>
+                <p>Description: {workExperiences.description}</p> */}
+                {workExperiences.map((experience, index) => (
+                  <div key={index}>
+                    <p>{`Company: ${experience.company}`}</p>
+                    <p>{`Job Title: ${experience.jobTitle}`}</p>
+                    <p>{`Date: ${experience.date}`}</p>
+                    <p>{`Description: ${experience.description}`}</p>
+                  </div>
+                ))}
               </div>
             </section>
             {/* Add more sections for skills, projects, or any other relevant information */}

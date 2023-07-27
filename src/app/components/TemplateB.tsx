@@ -17,10 +17,16 @@ interface TemplateBProps {
     linkedIn: string;
     location: string;
     summary: string;
-    company: string;
-    jobTitle: string;
-    date: string;
-    description: string;
+    // company: string;
+    // jobTitle: string;
+    // date: string;
+    // description: string;
+    workExperiences: {
+      company: string;
+      jobTitle: string;
+      date: string;
+      description: string;
+    }[];
   };
 }
 
@@ -35,10 +41,11 @@ const TemplateB: React.FC<TemplateBProps> = ({ data }) => {
     linkedIn,
     location,
     summary,
-    company,
-    jobTitle,
-    date,
-    description,
+    workExperiences,
+    // company,
+    // jobTitle,
+    // date,
+    // description,
   } = data;
 
   const pdfExportComponent = useRef(null);

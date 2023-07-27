@@ -14,13 +14,13 @@ import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+// const Item = styled(Paper)(({ theme }) => ({
+//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+//   ...theme.typography.body2,
+//   padding: theme.spacing(1),
+//   textAlign: "center",
+//   color: theme.palette.text.secondary,
+// }));
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({
@@ -33,10 +33,18 @@ export default function Home() {
     linkedIn: "",
     location: "",
     summary: "",
-    company: "",
-    jobTitle: "",
-    date: "",
-    description: "",
+    // company: "",
+    // jobTitle: "",
+    // date: "",
+    // description: "",
+    // workExperiences: [
+    //   {
+    //     company: "",
+    //     jobTitle: "",
+    //     date: "",
+    //     description: "",
+    //   },
+    // ],
   });
 
   // ---------------------------- WORK EXP
@@ -49,7 +57,21 @@ export default function Home() {
     },
   ]);
 
-  const handleWorkExperienceChange = (index: any, event: any) => {
+  // const handleWorkExperienceChange = (index: any, event: any) => {
+  //   const { name, value } = event.target;
+  //   setWorkExperiences((prevWorkExperiences) => {
+  //     const updatedExperiences = [...prevWorkExperiences];
+  //     updatedExperiences[index] = {
+  //       ...updatedExperiences[index],
+  //       [name]: value,
+  //     };
+  //     return updatedExperiences;
+  //   });
+  // };
+  const handleWorkExperienceChange = (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { name, value } = event.target;
     setWorkExperiences((prevWorkExperiences) => {
       const updatedExperiences = [...prevWorkExperiences];
@@ -57,9 +79,28 @@ export default function Home() {
         ...updatedExperiences[index],
         [name]: value,
       };
+      setCvData((prevData) => ({
+        ...prevData,
+        workExperiences: updatedExperiences,
+      }));
       return updatedExperiences;
     });
   };
+
+  // const handleWorkExperienceChange = (
+  //   index: number,
+  //   event: React.ChangeEvent<HTMLInputElement>
+  // ) => {
+  //   const { name, value } = event.target;
+  //   setWorkExperiences((prevWorkExperiences) => {
+  //     const updatedExperiences = [...prevWorkExperiences];
+  //     updatedExperiences[index] = {
+  //       ...updatedExperiences[index],
+  //       [name]: value,
+  //     };
+  //     return updatedExperiences;
+  //   });
+  // };
 
   const handleAddWorkExperience = () => {
     setWorkExperiences((prevWorkExperiences) => [
@@ -89,6 +130,8 @@ export default function Home() {
       [name]: value,
     }));
   };
+
+  const combinedData = { ...cvData, workExperiences };
 
   return (
     <div>
@@ -209,7 +252,7 @@ export default function Home() {
                             label="Company"
                             name="company"
                             value={experience.company}
-                            onChange={(e) =>
+                            onChange={(e: any) =>
                               handleWorkExperienceChange(index, e)
                             }
                             variant="standard"
@@ -229,7 +272,7 @@ export default function Home() {
                             label="Job Title"
                             name="jobTitle"
                             value={experience.jobTitle}
-                            onChange={(e) =>
+                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               handleWorkExperienceChange(index, e)
                             }
                             variant="standard"
@@ -241,7 +284,7 @@ export default function Home() {
                             label="Date"
                             name="date"
                             value={experience.date}
-                            onChange={(e) =>
+                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               handleWorkExperienceChange(index, e)
                             }
                             variant="standard"
@@ -252,7 +295,7 @@ export default function Home() {
                             label="Descripion"
                             name="description"
                             value={experience.description}
-                            onChange={(e) =>
+                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               handleWorkExperienceChange(index, e)
                             }
                             variant="standard"
@@ -261,6 +304,8 @@ export default function Home() {
                         </Grid>
                         {/* Add other work experience fields here */}
                       </Grid>
+                      <br></br>
+                      <br></br>
                     </div>
                   ))}
                   {/* Add Button to add more work experiences */}
@@ -272,7 +317,7 @@ export default function Home() {
                 {/* Work Experience */}
                 <span className="k-icon k-i-wrench"></span>
                 <h3>Work Experience</h3>
-                <div>
+                {/* <div>
                   <label htmlFor="company">Company:</label>
                   <input
                     type="text"
@@ -314,7 +359,7 @@ export default function Home() {
                     onChange={handleInputChange}
                     placeholder="Enter job description"
                   />
-                </div>
+                </div> */}
               </td>
               <td>
                 <div>
@@ -329,7 +374,7 @@ export default function Home() {
                 </div>
                 <br></br>
                 <h3>CV</h3>
-                <TemplateSelector data={cvData} />
+                <TemplateSelector data={combinedData} />
                 {/* <div>
                     <p>
                       Name: {firstName} {lastName}
@@ -374,6 +419,11 @@ export default function Home() {
         {/* <button onClick={handleAddInput}>Add Input</button> */}
       </div>
       <p>------------------------------------</p>
+      {/* <h1>TEST</h1>
+      <h1>
+        {cvData.firstName}, {workExperiences[0].company},
+        {workExperiences[1]?.company}
+      </h1> */}
     </div>
   );
 }
