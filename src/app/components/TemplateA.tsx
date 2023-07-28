@@ -20,10 +20,6 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
     linkedIn,
     location,
     summary,
-    // company,
-    // jobTitle,
-    // date,
-    // description,
     workExperiences,
   } = data;
 

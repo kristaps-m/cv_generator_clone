@@ -3,6 +3,7 @@ import React from "react";
 import { useRef } from "react";
 import { Icon } from "@progress/kendo-react-common";
 import styles from "../styles.module.css";
+import stylesCV from "./CVTemplate.module.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import ITemplateProps from "./ITemplateProps";
@@ -19,10 +20,6 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
     location,
     summary,
     workExperiences,
-    // company,
-    // jobTitle,
-    // date,
-    // description,
   } = data;
 
   const pdfExportComponent = useRef(null);
@@ -65,13 +62,24 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
             <p>Summary: {summary}</p>
           </div>
           <br></br>
-          <div>
-            <h3>Work Experience</h3>
-            <p>Company: {company}</p>
-            <p>Job Title: {jobTitle}</p>
-            <p>Date: {date}</p>
-            <p>Description: {description}</p>
-          </div>
+          <section className={stylesCV.cv_section}>
+              <h2>Work Experience</h2>
+              <div className={stylesCV.workItem}>
+                {/* <h3>{workExperiences.company}</h3>
+                <p>Position: {workExperiences.jobTitle}</p>
+                <p>Duration: {workExperiences.date} - Present</p>
+                <p>Description: {workExperiences.description}</p> */}
+                {workExperiences.map((experience, index) => (
+                  <div key={index}>
+                    <p>{`Company: ${experience.company}`}</p>
+                    <p>{`Job Title: ${experience.jobTitle}`}</p>
+                    <p>{`Date: ${experience.date}`}</p>
+                    <p>{`Description: ${experience.description}`}</p>
+                    <br></br>
+                  </div>
+                ))}
+              </div>
+            </section>
         </div>
       </PDFExport>
     </div>
