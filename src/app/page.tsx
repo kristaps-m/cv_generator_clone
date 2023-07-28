@@ -13,7 +13,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import BasicInfo from "./components/BasicInfo"
+import BasicInfo from "./components/BasicInfo";
+import WorkExperience from "./components/WorkExperience";
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({
@@ -104,82 +105,11 @@ export default function Home() {
                 <BasicInfo data={combinedData} handleInputChange={handleInputChange}/>
                 <br></br>
                 <br></br>
-                <Grid item xs={12}>
-                  <Grid item xs={12}>
-                    <h1>Work Experience:</h1>
-                  </Grid>
-                  {/* Work Experience List */}
-                  {workExperiences.map((experience, index) => (
-                    <div key={index}>
-                      <Grid container spacing={2}>
-                        <Grid item xs={10}>
-                          <TextField
-                            label="Company"
-                            name="company"
-                            value={experience.company}
-                            onChange={(e: any) =>
-                              handleWorkExperienceChange(index, e)
-                            }
-                            variant="standard"
-                            fullWidth
-                          />
-                        </Grid>
-                        <Grid item xs={2}>
-                          {/* Add a button with a trash can icon to remove the work experience */}
-                          <Button
-                            onClick={() => handleRemoveWorkExperience(index)}
-                          >
-                            <DeleteIcon></DeleteIcon>
-                          </Button>
-                        </Grid>
-                        <Grid item xs={8}>
-                          <TextField
-                            label="Job Title"
-                            name="jobTitle"
-                            value={experience.jobTitle}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              handleWorkExperienceChange(index, e)
-                            }
-                            variant="standard"
-                            fullWidth
-                          />
-                        </Grid>
-                        <Grid item xs={4}>
-                          <TextField
-                            label="Date"
-                            name="date"
-                            value={experience.date}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              handleWorkExperienceChange(index, e)
-                            }
-                            variant="standard"
-                          />
-                        </Grid>
-                        <Grid item xs={12}>
-                          <TextField
-                            label="Descripion"
-                            name="description"
-                            value={experience.description}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              handleWorkExperienceChange(index, e)
-                            }
-                            variant="standard"
-                            fullWidth
-                          />
-                        </Grid>
-                        {/* Add other work experience fields here */}
-                      </Grid>
-                      <br></br>
-                      <br></br>
-                    </div>
-                  ))}
-                  {/* Add Button to add more work experiences */}
-                  <Button onClick={handleAddWorkExperience} color="success">
-                    Add Work Experience
-                  </Button>
-                </Grid>
-                <br></br>
-                {/* Work Experience */}
+                {/*company, jobTitle, date, description, */}
+                <WorkExperience workExperiences={workExperiences}
+                   handleWorkExperienceChange={handleWorkExperienceChange}
+                    handleAddWorkExperience={handleAddWorkExperience}
+                     handleRemoveWorkExperience={handleRemoveWorkExperience}/>                
                 <span className="k-icon k-i-wrench"></span>
               </td>
               <td>
@@ -196,26 +126,6 @@ export default function Home() {
                 <br></br>
                 <h3>CV</h3>
                 <TemplateSelector data={combinedData} />
-                {/* <div>
-                    <p>
-                      Name: {firstName} {lastName}
-                    </p>
-                    <p>Position: {position}</p>
-                    <p>Email: {email}</p>
-                    <p>Phone: {phone}</p>
-                    <p>
-                      {<Icon name="linkedin" />} LinkedIn: {linkedIn}
-                    </p>
-                    <p>Summary: {summary}</p>
-                  </div>
-                  <br></br>
-                  <div>
-                    <h3>Work Experience</h3>
-                    <p>Company: {company}</p>
-                    <p>Job Title: {jobTitle}</p>
-                    <p>Date: {date}</p>
-                    <p>Description: {description}</p>
-                  </div> */}
               </td>
             </tr>
             <tr>
