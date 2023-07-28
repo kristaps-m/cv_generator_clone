@@ -15,5 +15,12 @@ export default interface ITemplateProps {
       date: string;
       description: string;
     }[];
+    educations: {
+      school: string;
+      schoolDate: string;
+      degreeAndMajor: string;
+      GPA: string;
+      achievements: string;
+    }[];
   };
 }

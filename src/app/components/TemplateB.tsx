@@ -20,6 +20,7 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
     location,
     summary,
     workExperiences,
+    educations,
   } = data;
 
   const pdfExportComponent = useRef(null);
@@ -63,23 +64,33 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
           </div>
           <br></br>
           <section className={stylesCV.cv_section}>
-              <h2>Work Experience</h2>
-              <div className={stylesCV.workItem}>
-                {/* <h3>{workExperiences.company}</h3>
-                <p>Position: {workExperiences.jobTitle}</p>
-                <p>Duration: {workExperiences.date} - Present</p>
-                <p>Description: {workExperiences.description}</p> */}
-                {workExperiences.map((experience, index) => (
-                  <div key={index}>
-                    <p>{`Company: ${experience.company}`}</p>
-                    <p>{`Job Title: ${experience.jobTitle}`}</p>
-                    <p>{`Date: ${experience.date}`}</p>
-                    <p>{`Description: ${experience.description}`}</p>
-                    <br></br>
-                  </div>
-                ))}
-              </div>
-            </section>
+            <h2>Work Experience</h2>
+            <div className={stylesCV.workItem}>
+              {workExperiences.map((experience, index) => (
+                <div key={index}>
+                  <p>{`Company: ${experience.company}`}</p>
+                  <p>{`Job Title: ${experience.jobTitle}`}</p>
+                  <p>{`Date: ${experience.date}`}</p>
+                  <p>{`Description: ${experience.description}`}</p>
+                  <br></br>
+                </div>
+              ))}
+            </div>
+          </section>
+          <section className={stylesCV.cv_section}>
+            <h2>Education</h2>
+            <div className={stylesCV.workItem}>
+              {educations.map((experience, index) => (
+                <div key={index}>
+                  <p>{`Scool: ${experience.school}`}</p>
+                  <p>{`Degree And Major: ${experience.degreeAndMajor}`}</p>
+                  <p>{`Date: ${experience.schoolDate}`}</p>
+                  <p>{`Achievements: ${experience.achievements}`}</p>
+                  <br></br>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
       </PDFExport>
     </div>

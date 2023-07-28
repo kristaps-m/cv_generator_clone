@@ -15,6 +15,7 @@ import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BasicInfo from "./components/BasicInfo";
 import WorkExperience from "./components/WorkExperience";
+import Education from "./components/Education";
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({
@@ -74,7 +75,53 @@ export default function Home() {
     });
   };
   // ---------------------------- WORK EXP ^^
+  // ---------------------------- EDUCATION
+  const [educations, setEducations] = useState([
+    {
+      school: "",
+      schoolDate: "",
+      degreeAndMajor: "",
+      GPA: "",
+      achievements: "",
+    },
+  ]);
 
+  const handleEducationsChange = (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = event.target;
+    setEducations((prevEducations) => {
+      const updatedEducations = [...prevEducations];
+      updatedEducations[index] = {
+        ...updatedEducations[index],
+        [name]: value,
+      };
+      return updatedEducations;
+    });
+  };
+
+  const handleAddEducations = () => {
+    setEducations((prevEducations) => [
+      ...prevEducations,
+      {
+        school: "",
+        schoolDate: "",
+        degreeAndMajor: "",
+        GPA: "",
+        achievements: "",
+      },
+    ]);
+  };
+
+  const handleRemoveEducation = (index: number) => {
+    setEducations((prevEducations) => {
+      const updatedEducations = [...prevEducations];
+      updatedEducations.splice(index, 1);
+      return updatedEducations;
+    });
+  };
+  // ---------------------------- EDUCATION ^^
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setCvData((prevData) => ({
@@ -83,7 +130,7 @@ export default function Home() {
     }));
   };
 
-  const combinedData = { ...cvData, workExperiences };
+  const combinedData = { ...cvData, workExperiences, educations };
 
   return (
     <div>
@@ -99,18 +146,31 @@ export default function Home() {
           </thead>
           <tbody>
             <tr>
-              <td> 
+              <td>
                 {/* firstName,lastName,position,yearsOfExperience,
                 email,phone,linkedIn,location: */}
-                <BasicInfo data={combinedData} handleInputChange={handleInputChange}/>
+                <BasicInfo
+                  data={combinedData}
+                  handleInputChange={handleInputChange}
+                />
                 <br></br>
                 <br></br>
                 {/*company, jobTitle, date, description, */}
-                <WorkExperience workExperiences={workExperiences}
-                   handleWorkExperienceChange={handleWorkExperienceChange}
-                    handleAddWorkExperience={handleAddWorkExperience}
-                     handleRemoveWorkExperience={handleRemoveWorkExperience}/>                
-                <span className="k-icon k-i-wrench"></span>
+                <WorkExperience
+                  workExperiences={workExperiences}
+                  handleWorkExperienceChange={handleWorkExperienceChange}
+                  handleAddWorkExperience={handleAddWorkExperience}
+                  handleRemoveWorkExperience={handleRemoveWorkExperience}
+                />
+                {/* <span className="k-icon k-i-wrench"></span> */}
+                <br></br>
+                <br></br>
+                <Education
+                  educations={educations}
+                  handleEducationsChange={handleEducationsChange}
+                  handleAddEducations={handleAddEducations}
+                  handleRemoveEducation={handleRemoveEducation}
+                />
               </td>
               <td>
                 <div>

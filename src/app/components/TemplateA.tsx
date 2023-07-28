@@ -21,6 +21,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
     location,
     summary,
     workExperiences,
+    educations,
   } = data;
 
   const pdfExportComponent = useRef(null);
@@ -79,24 +80,8 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
               </div>
             </section>
             <section className={stylesCV.cv_section}>
-              <h2>Summary / Live goals</h2>
-              <p>{summary}</p>
-            </section>
-            <section className={stylesCV.cv_section}>
-              <h2>Education</h2>
-              <div className={stylesCV.educationItem}>
-                <h3>University Name</h3>
-                <p>Degree: Bachelor of Science in Computer Science</p>
-                <p>Graduation Year: 20XX</p>
-              </div>
-            </section>
-            <section className={stylesCV.cv_section}>
               <h2>Work Experience</h2>
               <div className={stylesCV.workItem}>
-                {/* <h3>{workExperiences.company}</h3>
-                <p>Position: {workExperiences.jobTitle}</p>
-                <p>Duration: {workExperiences.date} - Present</p>
-                <p>Description: {workExperiences.description}</p> */}
                 {workExperiences.map((experience, index) => (
                   <div key={index}>
                     <p>{`Company: ${experience.company}`}</p>
@@ -108,30 +93,22 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 ))}
               </div>
             </section>
+            <section className={stylesCV.cv_section}>
+              <h2>Education</h2>
+              <div className={stylesCV.workItem}>
+                {educations.map((experience, index) => (
+                  <div key={index}>
+                    <p>{`Scool: ${experience.school}`}</p>
+                    <p>{`Degree And Major: ${experience.degreeAndMajor}`}</p>
+                    <p>{`Date: ${experience.schoolDate}`}</p>
+                    <p>{`Achievements: ${experience.achievements}`}</p>
+                    <br></br>
+                  </div>
+                ))}
+              </div>
+            </section>
             {/* Add more sections for skills, projects, or any other relevant information */}
           </div>
-          {/* <h1 className={styles.templateA}>TEMPLATE -A-</h1>
-          <div>
-            <h3 className={styles.templateA}>CV</h3>
-            <p>
-              Name: {firstName} {lastName}
-            </p>
-            <p className={styles.templateA}>Position: {position}</p>
-            <p>Email: {email}</p>
-            <p>Phone: {phone}</p>
-            <p>
-              {<Icon name="linkedin" />} LinkedIn: {linkedIn}
-            </p>
-            <p>Summary: {summary}</p>
-          </div>
-          <br></br>
-          <div>
-            <h3>Work Experience</h3>
-            <p>Company: {company}</p>
-            <p>Job Title: {jobTitle}</p>
-            <p>Date: {date}</p>
-            <p>Description: {description}</p>
-          </div> */}
         </div>
       </PDFExport>
     </div>
