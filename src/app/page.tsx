@@ -13,6 +13,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import BasicInfo from "./components/BasicInfo"
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({
@@ -97,96 +98,10 @@ export default function Home() {
           </thead>
           <tbody>
             <tr>
-              <td>
-                <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <TextField
-                      id="fullWidth"
-                      label="First Name"
-                      name="firstName"
-                      value={cvData.firstName}
-                      onChange={handleInputChange}
-                      variant="standard"
-                      placeholder="Enter your first name"
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      id="fullWidth"
-                      label="Last Name"
-                      name="lastName"
-                      value={cvData.lastName}
-                      onChange={handleInputChange}
-                      variant="standard"
-                      placeholder="Enter your last name"
-                    />
-                  </Grid>
-                  <Grid item xs={8}>
-                    <TextField
-                      fullWidth
-                      id="fullWidth"
-                      label="Profession"
-                      name="position"
-                      value={cvData.position}
-                      onChange={handleInputChange}
-                      variant="standard"
-                      placeholder="Enter your profession"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                      id="fullWidth"
-                      label="Years Of Experience"
-                      name="yearsOfExperience"
-                      value={cvData.yearsOfExperience}
-                      onChange={handleInputChange}
-                      variant="standard"
-                      placeholder="Enter your experience"
-                    />
-                  </Grid>
-                  <Grid item xs={8}>
-                    <TextField
-                      fullWidth
-                      id="fullWidth"
-                      label="E-mail"
-                      name="email"
-                      value={cvData.email}
-                      onChange={handleInputChange}
-                      variant="standard"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                      id="fullWidth"
-                      label="Mobile phone"
-                      name="phone"
-                      value={cvData.phone}
-                      onChange={handleInputChange}
-                      variant="standard"
-                    />
-                  </Grid>
-                  <Grid item xs={8}>
-                    <TextField
-                      fullWidth
-                      id="fullWidth"
-                      label="LinkedIn"
-                      name="linkedIn"
-                      value={cvData.linkedIn}
-                      onChange={handleInputChange}
-                      variant="standard"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                      id="fullWidth"
-                      label="Location"
-                      name="location"
-                      value={cvData.location}
-                      onChange={handleInputChange}
-                      variant="standard"
-                    />
-                  </Grid>
-                </Grid>
+              <td> 
+                {/* firstName,lastName,position,yearsOfExperience,
+                email,phone,linkedIn,location: */}
+                <BasicInfo data={combinedData} handleInputChange={handleInputChange}/>
                 <br></br>
                 <br></br>
                 <Grid item xs={12}>
@@ -266,50 +181,6 @@ export default function Home() {
                 <br></br>
                 {/* Work Experience */}
                 <span className="k-icon k-i-wrench"></span>
-                <h3>Work Experience</h3>
-                {/* <div>
-                  <label htmlFor="company">Company:</label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    value={cvData.company}
-                    onChange={handleInputChange}
-                    placeholder="Enter company name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="jobTitle">Job Title:</label>
-                  <input
-                    type="text"
-                    id="jobTitle"
-                    name="jobTitle"
-                    value={cvData.jobTitle}
-                    onChange={handleInputChange}
-                    placeholder="Enter job title"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="date">Date:</label>
-                  <input
-                    type="text"
-                    id="date"
-                    name="date"
-                    value={cvData.date}
-                    onChange={handleInputChange}
-                    placeholder="Enter date"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="description">Description:</label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    value={cvData.description}
-                    onChange={handleInputChange}
-                    placeholder="Enter job description"
-                  />
-                </div> */}
               </td>
               <td>
                 <div>
