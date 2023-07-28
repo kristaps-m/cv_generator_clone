@@ -22,5 +22,9 @@ export default interface ITemplateProps {
       GPA: string;
       achievements: string;
     }[];
+    skills: {
+      name: string;
+      strength: number;
+    }[];
   };
 }

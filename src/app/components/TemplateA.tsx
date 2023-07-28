@@ -22,6 +22,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
     summary,
     workExperiences,
     educations,
+    skills,
   } = data;
 
   const pdfExportComponent = useRef(null);
@@ -102,6 +103,18 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                     <p>{`Degree And Major: ${experience.degreeAndMajor}`}</p>
                     <p>{`Date: ${experience.schoolDate}`}</p>
                     <p>{`Achievements: ${experience.achievements}`}</p>
+                    <br></br>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section className={stylesCV.cv_section}>
+              <h2>Skills</h2>
+              <div className={stylesCV.workItem}>
+                {skills.map((experience, index) => (
+                  <div key={index}>
+                    <p>{`Skill: ${experience.name}`}</p>
+                    <p>{`Skill Power: ${experience.strength}`}</p>
                     <br></br>
                   </div>
                 ))}

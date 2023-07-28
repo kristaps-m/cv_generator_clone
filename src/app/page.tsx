@@ -11,7 +11,7 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { Button } from "@mui/material";
+import { Button, Slider } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BasicInfo from "./components/BasicInfo";
 import WorkExperience from "./components/WorkExperience";
@@ -122,6 +122,55 @@ export default function Home() {
     });
   };
   // ---------------------------- EDUCATION ^^
+  // ---------------------------- SKILS
+  const [skills, setSkills] = useState([
+    {
+      name: "",
+      strength: 1,
+    },
+  ]);
+
+  const handleSkillNameChange = (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value } = event.target;
+    setSkills((prevSkills) => {
+      const updatedSkills = [...prevSkills];
+      updatedSkills[index] = {
+        ...updatedSkills[index],
+        name: value,
+      };
+      return updatedSkills;
+    });
+  };
+
+  const handleSkillStrengthChange = (index: number, value: number) => {
+    setSkills((prevSkills) => {
+      const updatedSkills = [...prevSkills];
+      updatedSkills[index].strength = value;
+      return updatedSkills;
+    });
+  };
+
+  const handleAddSkill = () => {
+    setSkills((prevSkills) => [
+      ...prevSkills,
+      {
+        name: "",
+        strength: 1,
+      },
+    ]);
+  };
+
+  const handleRemoveSkill = (index: number) => {
+    setSkills((prevSkills) => {
+      const updatedSkills = [...prevSkills];
+      updatedSkills.splice(index, 1);
+      return updatedSkills;
+    });
+  };
+  // ---------------------------- SKILS ^^
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setCvData((prevData) => ({
@@ -130,7 +179,7 @@ export default function Home() {
     }));
   };
 
-  const combinedData = { ...cvData, workExperiences, educations };
+  const combinedData = { ...cvData, workExperiences, educations, skills };
 
   return (
     <div>
@@ -171,6 +220,45 @@ export default function Home() {
                   handleAddEducations={handleAddEducations}
                   handleRemoveEducation={handleRemoveEducation}
                 />
+                <br></br>
+                <br></br>
+                <div>
+                  <h1>Skills:</h1>
+                  {skills.map((skill, index) => (
+                    <div key={index}>
+                      <TextField
+                        label="Skill Name"
+                        name={`skills[${index}].name`}
+                        value={skill.name}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          handleSkillNameChange(index, e)
+                        }
+                        variant="standard"
+                      />
+                      <Slider
+                        value={skill.strength}
+                        // onChange={(event, value) =>
+                        //   handleSkillStrengthChange(index, value)
+                        // }
+                        onChange={(event: Event, value: number | number[]) => {
+                          // Check if the value is an array (multi-value slider)
+                          const newValue =
+                            typeof value === "number" ? value : value[0];
+                          handleSkillStrengthChange(index, newValue);
+                        }}
+                        min={1}
+                        max={5}
+                        step={1}
+                        marks
+                        valueLabelDisplay="auto"
+                      />
+                      <Button onClick={() => handleRemoveSkill(index)}>
+                        <DeleteIcon />
+                      </Button>
+                    </div>
+                  ))}
+                  <Button onClick={handleAddSkill}>Add Skill</Button>
+                </div>
               </td>
               <td>
                 <div>
