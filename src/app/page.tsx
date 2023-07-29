@@ -1,21 +1,17 @@
 "use client";
 // import axios from "axios";
 // import Image from "next/image";
-import { useRef } from "react";
-import { styled } from "@mui/material/styles";
 import { ChangeEvent, useState } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
-import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import TemplateSelector from "./components/TemplateSelector";
 import React from "react";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import { Button, Slider } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { Box, Paper } from "@mui/material";
 import BasicInfo from "./components/BasicInfo";
 import WorkExperience from "./components/WorkExperience";
 import Education from "./components/Education";
+import Skills from "./components/Skills";
+import { handleRemoveElement } from "./utils";
+import { lightblueBackgroundAllBoxes } from "./constants";
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({
@@ -68,11 +64,7 @@ export default function Home() {
   };
 
   const handleRemoveWorkExperience = (index: number) => {
-    setWorkExperiences((prevWorkExperiences) => {
-      const updatedExperience = [...prevWorkExperiences];
-      updatedExperience.splice(index, 1);
-      return updatedExperience;
-    });
+    handleRemoveElement(index, workExperiences, setWorkExperiences);
   };
   // ---------------------------- WORK EXP ^^
   // ---------------------------- EDUCATION
@@ -115,11 +107,7 @@ export default function Home() {
   };
 
   const handleRemoveEducation = (index: number) => {
-    setEducations((prevEducations) => {
-      const updatedEducations = [...prevEducations];
-      updatedEducations.splice(index, 1);
-      return updatedEducations;
-    });
+    handleRemoveElement(index, educations, setEducations);
   };
   // ---------------------------- EDUCATION ^^
   // ---------------------------- SKILS
@@ -164,11 +152,7 @@ export default function Home() {
   };
 
   const handleRemoveSkill = (index: number) => {
-    setSkills((prevSkills) => {
-      const updatedSkills = [...prevSkills];
-      updatedSkills.splice(index, 1);
-      return updatedSkills;
-    });
+    handleRemoveElement(index, skills, setSkills);
   };
   // ---------------------------- SKILS ^^
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -196,69 +180,39 @@ export default function Home() {
           <tbody>
             <tr>
               <td>
-                {/* firstName,lastName,position,yearsOfExperience,
-                email,phone,linkedIn,location: */}
-                <BasicInfo
-                  data={combinedData}
-                  handleInputChange={handleInputChange}
-                />
-                <br></br>
-                <br></br>
-                {/*company, jobTitle, date, description, */}
-                <WorkExperience
-                  workExperiences={workExperiences}
-                  handleWorkExperienceChange={handleWorkExperienceChange}
-                  handleAddWorkExperience={handleAddWorkExperience}
-                  handleRemoveWorkExperience={handleRemoveWorkExperience}
-                />
-                {/* <span className="k-icon k-i-wrench"></span> */}
-                <br></br>
-                <br></br>
-                <Education
-                  educations={educations}
-                  handleEducationsChange={handleEducationsChange}
-                  handleAddEducations={handleAddEducations}
-                  handleRemoveEducation={handleRemoveEducation}
-                />
-                <br></br>
-                <br></br>
-                <div>
-                  <h1>Skills:</h1>
-                  {skills.map((skill, index) => (
-                    <div key={index}>
-                      <TextField
-                        label="Skill Name"
-                        name={`skills[${index}].name`}
-                        value={skill.name}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                          handleSkillNameChange(index, e)
-                        }
-                        variant="standard"
-                      />
-                      <Slider
-                        value={skill.strength}
-                        // onChange={(event, value) =>
-                        //   handleSkillStrengthChange(index, value)
-                        // }
-                        onChange={(event: Event, value: number | number[]) => {
-                          // Check if the value is an array (multi-value slider)
-                          const newValue =
-                            typeof value === "number" ? value : value[0];
-                          handleSkillStrengthChange(index, newValue);
-                        }}
-                        min={1}
-                        max={5}
-                        step={1}
-                        marks
-                        valueLabelDisplay="auto"
-                      />
-                      <Button onClick={() => handleRemoveSkill(index)}>
-                        <DeleteIcon />
-                      </Button>
-                    </div>
-                  ))}
-                  <Button onClick={handleAddSkill}>Add Skill</Button>
-                </div>
+                <Paper elevation={3}>
+                  <Box
+                    p={1}
+                    sx={{ backgroundColor: lightblueBackgroundAllBoxes }}
+                  >
+                    <BasicInfo
+                      data={combinedData}
+                      handleInputChange={handleInputChange}
+                    />
+                    <br />
+                    <WorkExperience
+                      workExperiences={workExperiences}
+                      handleWorkExperienceChange={handleWorkExperienceChange}
+                      handleAddWorkExperience={handleAddWorkExperience}
+                      handleRemoveWorkExperience={handleRemoveWorkExperience}
+                    />
+                    <br />
+                    <Education
+                      educations={educations}
+                      handleEducationsChange={handleEducationsChange}
+                      handleAddEducations={handleAddEducations}
+                      handleRemoveEducation={handleRemoveEducation}
+                    />
+                    <br />
+                    <Skills
+                      skills={skills}
+                      handleAddSkill={handleAddSkill}
+                      handleSkillNameChange={handleSkillNameChange}
+                      handleSkillStrengthChange={handleSkillStrengthChange}
+                      handleRemoveSkill={handleRemoveSkill}
+                    />
+                  </Box>
+                </Paper>
               </td>
               <td>
                 <div>

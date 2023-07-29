@@ -8,6 +8,7 @@ import { Button } from "@progress/kendo-react-buttons";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import Head from "next/head";
 import ITemplateProps from "./ITemplateProps";
+import { Grid, Rating } from "@mui/material";
 
 const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
   const {
@@ -111,16 +112,20 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
             <section className={stylesCV.cv_section}>
               <h2>Skills</h2>
               <div className={stylesCV.workItem}>
-                {skills.map((experience, index) => (
-                  <div key={index}>
-                    <p>{`Skill: ${experience.name}`}</p>
-                    <p>{`Skill Power: ${experience.strength}`}</p>
-                    <br></br>
-                  </div>
-                ))}
+                <Grid container spacing={2}>
+                  {skills.map((skill, index) => (
+                    <Grid key={index} item xs={4}>
+                      <p>{skill.name}</p>
+                      <Rating
+                        name="read-only"
+                        value={skill.strength}
+                        readOnly
+                      />
+                    </Grid>
+                  ))}
+                </Grid>
               </div>
             </section>
-            {/* Add more sections for skills, projects, or any other relevant information */}
           </div>
         </div>
       </PDFExport>
