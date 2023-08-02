@@ -29,3 +29,15 @@
   color: red;
   font-size: 18px;
 }
+
+.container {
+  /* Set a fixed height for the container to enable scrolling */
+  height: 100vh;
+  /* Add any other styles you want for the container */
+}
+
+.content {
+  /* Enable scrolling for the content when it exceeds the container height */
+  overflow-y: auto;
+  /* Add any other styles for the content */
+}

@@ -5,7 +5,7 @@ import { ChangeEvent, useState } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import TemplateSelector from "./components/TemplateSelector";
 import React from "react";
-import { Box, Paper } from "@mui/material";
+import { Box, Grid, Paper } from "@mui/material";
 import BasicInfo from "./components/BasicInfo";
 import WorkExperience from "./components/WorkExperience";
 import Education from "./components/Education";
@@ -13,6 +13,7 @@ import Skills from "./components/Skills";
 import ResumeSetting from "./components/ResumeSetting";
 import { handleRemoveElement } from "./utils";
 import { lightblueBackgroundAllBoxes } from "./constants";
+import styles from "./styles.module.css";
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({
@@ -172,95 +173,66 @@ export default function Home() {
   };
   // ---------------------------- ResumeSetting ^^
 
-
-  const combinedData = { ...cvData, workExperiences, educations, skills, selectedColor };
+  const combinedData = {
+    ...cvData,
+    workExperiences,
+    educations,
+    skills,
+    selectedColor,
+  };
 
   return (
     <div>
-      <h2>CV Generator</h2>
+      <h2>CV Generator </h2>
       <p>------------------------------------</p>
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Input</th>
-              <th>Output</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <Paper elevation={3}>
-                  <Box
-                    p={1}
-                    sx={{ backgroundColor: lightblueBackgroundAllBoxes }}
-                  >
-                    <BasicInfo
-                      data={combinedData}
-                      handleInputChange={handleInputChange}
-                    />
-                    <br />
-                    <WorkExperience
-                      workExperiences={workExperiences}
-                      handleWorkExperienceChange={handleWorkExperienceChange}
-                      handleAddWorkExperience={handleAddWorkExperience}
-                      handleRemoveWorkExperience={handleRemoveWorkExperience}
-                    />
-                    <br />
-                    <Education
-                      educations={educations}
-                      handleEducationsChange={handleEducationsChange}
-                      handleAddEducations={handleAddEducations}
-                      handleRemoveEducation={handleRemoveEducation}
-                    />
-                    <br />
-                    <Skills
-                      skills={skills}
-                      handleAddSkill={handleAddSkill}
-                      handleSkillNameChange={handleSkillNameChange}
-                      handleSkillStrengthChange={handleSkillStrengthChange}
-                      handleRemoveSkill={handleRemoveSkill}
-                    />
-                    <br />
-                    <ResumeSetting onSelectColor={handleColorSelect}/>
-                  </Box>
-                </Paper>
-              </td>
-              <td>
-                <div>
-                  <h1>CV Preview</h1>
-                  {/* <script>
-                    {
-                      ((cvData.firstName = firstName),
-                      (cvData.lastName = lastName),
-                      (cvData.email = email))
-                    }
-                  </script> */}
-                </div>
-                <br></br>
-                <h3>CV</h3>
-                <TemplateSelector data={combinedData} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                {/* <input
-                  type="text"
-                  value={inputs[1].input}
-                  onChange={(event) => handleInputChange(event, 1, "input")}
-                /> */}
-              </td>
-              <td>
-                {/* <input
-                  type="text"
-                  value={inputs[1].output}
-                  onChange={(event) => handleInputChange(event, 1, "output")}
-                /> */}
-              </td>
-            </tr>
-            {/* Add more rows if needed */}
-          </tbody>
-        </table>
+        <Grid container spacing={2}>
+          <Grid xs={6}>
+            <Paper elevation={3}>
+              <Box
+                p={1}
+                sx={{
+                  backgroundColor: lightblueBackgroundAllBoxes,
+                  overflowY: "auto", // Add this line to make the input section scrollable
+                  maxHeight: "calc(100vh - 64px)", // Set a maximum height to prevent it from expanding beyond the viewport
+                }}
+              >
+                <BasicInfo
+                  data={combinedData}
+                  handleInputChange={handleInputChange}
+                />
+                <br />
+                <WorkExperience
+                  workExperiences={workExperiences}
+                  handleWorkExperienceChange={handleWorkExperienceChange}
+                  handleAddWorkExperience={handleAddWorkExperience}
+                  handleRemoveWorkExperience={handleRemoveWorkExperience}
+                />
+                <br />
+                <Education
+                  educations={educations}
+                  handleEducationsChange={handleEducationsChange}
+                  handleAddEducations={handleAddEducations}
+                  handleRemoveEducation={handleRemoveEducation}
+                />
+                <br />
+                <Skills
+                  skills={skills}
+                  handleAddSkill={handleAddSkill}
+                  handleSkillNameChange={handleSkillNameChange}
+                  handleSkillStrengthChange={handleSkillStrengthChange}
+                  handleRemoveSkill={handleRemoveSkill}
+                />
+                <br />
+                <ResumeSetting onSelectColor={handleColorSelect} />
+              </Box>
+            </Paper>
+          </Grid>
+          <Grid xs={6}>
+            <TemplateSelector data={combinedData} />
+          </Grid>
+        </Grid>
+
         {/* <button onClick={handleAddInput}>Add Input</button> */}
       </div>
       <p>------------------------------------</p>

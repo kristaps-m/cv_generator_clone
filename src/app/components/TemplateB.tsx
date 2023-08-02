@@ -7,6 +7,7 @@ import stylesCV from "./CVTemplate.module.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import ITemplateProps from "./ITemplateProps";
+import { colors } from "@mui/material";
 
 const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
   const {
@@ -21,6 +22,8 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
     summary,
     workExperiences,
     educations,
+    skills,
+    selectedColor,
   } = data;
 
   const pdfExportComponent = useRef(null);

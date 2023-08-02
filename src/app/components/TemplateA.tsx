@@ -8,8 +8,9 @@ import { Button } from "@progress/kendo-react-buttons";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import Head from "next/head";
 import ITemplateProps from "./ITemplateProps";
-import { Box, Grid, Rating } from "@mui/material";
+import { Box, Grid, Rating, Typography } from "@mui/material";
 import { defaultColor } from "../constants";
+import ColoredLineWithText from "./ColoredLineWithText";
 
 const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
   const {
@@ -35,7 +36,10 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
     pdfExportComponent.current.save();
   };
 
-  let colorFromResumeSetting = selectedColor === "" || selectedColor === null ? defaultColor : selectedColor;
+  let colorFromResumeSetting =
+    selectedColor === "" || selectedColor === null
+      ? defaultColor
+      : selectedColor;
 
   return (
     <div>
@@ -86,7 +90,10 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
               </div>
             </section>
             <section className={stylesCV.cv_section}>
-              <span><Box sx={{width: 100, height: 10,backgroundColor: colorFromResumeSetting }}></Box><h2>Work Experience</h2></span>              
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="Work Experience:"
+              />
               <div className={stylesCV.workItem}>
                 {workExperiences.map((experience, index) => (
                   <div key={index}>
@@ -100,7 +107,10 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
               </div>
             </section>
             <section className={stylesCV.cv_section}>
-              <h2>Education</h2>
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="Education:"
+              />
               <div className={stylesCV.workItem}>
                 {educations.map((experience, index) => (
                   <div key={index}>
@@ -114,7 +124,10 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
               </div>
             </section>
             <section className={stylesCV.cv_section}>
-              <h2>Skills</h2>
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="Skills:"
+              />
               <div className={stylesCV.workItem}>
                 <Grid container spacing={2}>
                   {skills.map((skill, index) => (
