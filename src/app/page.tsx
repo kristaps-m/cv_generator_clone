@@ -10,6 +10,7 @@ import BasicInfo from "./components/BasicInfo";
 import WorkExperience from "./components/WorkExperience";
 import Education from "./components/Education";
 import Skills from "./components/Skills";
+import ResumeSetting from "./components/ResumeSetting";
 import { handleRemoveElement } from "./utils";
 import { lightblueBackgroundAllBoxes } from "./constants";
 
@@ -25,6 +26,14 @@ export default function Home() {
     location: "",
     summary: "",
   });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCvData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   // ---------------------------- WORK EXP
   const [workExperiences, setWorkExperiences] = useState([
@@ -155,15 +164,16 @@ export default function Home() {
     handleRemoveElement(index, skills, setSkills);
   };
   // ---------------------------- SKILS ^^
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setCvData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  // ---------------------------- ResumeSetting
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
-  const combinedData = { ...cvData, workExperiences, educations, skills };
+  const handleColorSelect = (color: string) => {
+    setSelectedColor(color);
+  };
+  // ---------------------------- ResumeSetting ^^
+
+
+  const combinedData = { ...cvData, workExperiences, educations, skills, selectedColor };
 
   return (
     <div>
@@ -211,6 +221,8 @@ export default function Home() {
                       handleSkillStrengthChange={handleSkillStrengthChange}
                       handleRemoveSkill={handleRemoveSkill}
                     />
+                    <br />
+                    <ResumeSetting onSelectColor={handleColorSelect}/>
                   </Box>
                 </Paper>
               </td>

@@ -26,5 +26,6 @@ export default interface ITemplateProps {
       name: string;
       strength: number;
     }[];
+    selectedColor: string | null;
   };
 }

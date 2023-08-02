@@ -8,7 +8,8 @@ import { Button } from "@progress/kendo-react-buttons";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import Head from "next/head";
 import ITemplateProps from "./ITemplateProps";
-import { Grid, Rating } from "@mui/material";
+import { Box, Grid, Rating } from "@mui/material";
+import { defaultColor } from "../constants";
 
 const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
   const {
@@ -24,6 +25,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
     workExperiences,
     educations,
     skills,
+    selectedColor,
   } = data;
 
   const pdfExportComponent = useRef(null);
@@ -32,6 +34,8 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
     console.log("I clicked to export PDF");
     pdfExportComponent.current.save();
   };
+
+  let colorFromResumeSetting = selectedColor === "" || selectedColor === null ? defaultColor : selectedColor;
 
   return (
     <div>
@@ -82,7 +86,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
               </div>
             </section>
             <section className={stylesCV.cv_section}>
-              <h2>Work Experience</h2>
+              <span><Box sx={{width: 100, height: 10,backgroundColor: colorFromResumeSetting }}></Box><h2>Work Experience</h2></span>              
               <div className={stylesCV.workItem}>
                 {workExperiences.map((experience, index) => (
                   <div key={index}>
@@ -125,6 +129,9 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                   ))}
                 </Grid>
               </div>
+            </section>
+            <section>
+              <h1>Selected color: {selectedColor}</h1>
             </section>
           </div>
         </div>
