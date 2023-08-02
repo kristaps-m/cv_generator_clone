@@ -42,7 +42,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
       : selectedColor;
 
   return (
-    <div>
+    <div className={styles.FrukturFont}>
       <div className="button-area">
         <Button themeColor={"primary"} onClick={handleExportWithComponent}>
           Save as PDF
@@ -59,13 +59,13 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
             position: "relative",
           }}
         >
-          <Head>
+          {/* <Head>
             <title>Your Name - CV</title>
             <link
               rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
             />
-          </Head>
+          </Head> */}
           <div className={stylesCV.cv}>
             <header className={stylesCV.cv_header}>
               <h1>
