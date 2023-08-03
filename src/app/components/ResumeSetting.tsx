@@ -33,10 +33,14 @@ const ResumeSetting: React.FC<ColorPaletteProps> = ({
 
   const fontFamilies = [
     "Arial",
-    "Helvetica",
     "Times New Roman",
     "Courier New",
     "Verdana",
+    "Fruktur",
+    "Merriweather",
+    "Rakkas",
+    "Yatra One",
+    "Erica One",
   ];
 
   const handleColorClick = (color: string) => {

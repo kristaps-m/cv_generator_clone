@@ -4,11 +4,13 @@ import { Box, Typography } from "@mui/material";
 interface IColoredLineWithTextProps {
   color: string;
   text: string;
+  selectedFont: string;
 }
 
 const ColoredLineWithText: React.FC<IColoredLineWithTextProps> = ({
   color,
   text,
+  selectedFont,
 }) => {
   return (
     <span style={{ display: "flex", alignItems: "center" }}>
@@ -20,7 +22,9 @@ const ColoredLineWithText: React.FC<IColoredLineWithTextProps> = ({
           marginRight: "10px",
         }}
       ></Box>
-      <Typography variant="h6">{text}</Typography>
+      <Typography variant="h6" style={{ fontFamily: selectedFont }}>
+        {text}
+      </Typography>
     </span>
   );
 };

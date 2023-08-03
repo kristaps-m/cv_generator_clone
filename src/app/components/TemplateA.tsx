@@ -59,7 +59,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
       : selectedColor;
 
   return (
-    <div className={styles.FrukturFont}>
+    <div>
       <div className="button-area">
         <Button themeColor={"primary"} onClick={handleExportWithComponent}>
           Save as PDF
@@ -83,7 +83,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
               href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
             />
           </Head> */}
-          <div className={stylesCV.cv}>
+          <div className={stylesCV.cv} style={{ fontFamily: selectedFont }}>
             <header className={stylesCV.cv_header}>
               <h1>
                 {firstName} {lastName}
@@ -92,7 +92,11 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
               <p>Experience: {yearsOfExperience} years</p>
             </header>
             <section className={stylesCV.cv_section}>
-              <h2>Personal Information</h2>
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="Personal Information:"
+                selectedFont={selectedFont}
+              />
               <div className={stylesCV.infoItem}>
                 <span>Phone:</span> <span>{phone}</span>
               </div>
@@ -106,12 +110,11 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 <span>Location:</span> <span>{location}</span>
               </div>
             </section>
-            <section
-              className={[stylesCV.cv_section, roboto.className].join(" ")}
-            >
+            <section className={stylesCV.cv_section}>
               <ColoredLineWithText
                 color={colorFromResumeSetting}
                 text="Work Experience:"
+                selectedFont={selectedFont}
               />
               <div className={stylesCV.workItem}>
                 {workExperiences.map((experience, index) => (
@@ -125,12 +128,11 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 ))}
               </div>
             </section>
-            <section
-              className={[stylesCV.cv_section, fruktur.className].join(" ")}
-            >
+            <section className={stylesCV.cv_section}>
               <ColoredLineWithText
                 color={colorFromResumeSetting}
                 text="Education:"
+                selectedFont={selectedFont}
               />
               <div className={stylesCV.workItem}>
                 {educations.map((experience, index) => (
@@ -144,17 +146,12 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 ))}
               </div>
             </section>
-            <section
-              className={[stylesCV.cv_section, courier_prime.className].join(
-                " "
-              )}
-            >
+            <section className={stylesCV.cv_section}>
               <ColoredLineWithText
                 color={colorFromResumeSetting}
                 text="Skills:"
+                selectedFont={selectedFont}
               />
-              <h1>TEST adasdasd</h1>
-              <p>ipsum asdad asd asdadmaoid a</p>
               <div className={stylesCV.workItem}>
                 <Grid container spacing={2}>
                   {skills.map((skill, index) => (

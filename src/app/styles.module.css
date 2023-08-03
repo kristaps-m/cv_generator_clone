@@ -58,10 +58,24 @@
   font-family: "Fruktur";
   src: url("../../asset/Fruktur/Fruktur-Regular.ttf");
   src: url("../../asset/Fruktur/Fruktur-Italic.ttf");
-  /* src: url("asset/Fruktur/Fruktur-Regular.ttf");
-  src: url("asset/Fruktur/Fruktur-Italic.ttf"); */
 }
 
-.FrukturFont {
-  font-family: "Fruktur";
+@font-face {
+  font-family: "Erica One";
+  src: url("../../asset/Erica One/EricaOne-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Yatra One";
+  src: url("../../asset/Yatra One/YatraOne-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Rakkas";
+  src: url("../../asset/Rakkas/Rakkas-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Merriweather";
+  src: url("../../asset/Merriweather/Merriweather-Regular.ttf");
 }
