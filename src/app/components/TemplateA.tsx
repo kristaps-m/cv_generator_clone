@@ -11,6 +11,17 @@ import ITemplateProps from "./ITemplateProps";
 import { Box, Grid, Rating, Typography } from "@mui/material";
 import { defaultColor } from "../constants";
 import ColoredLineWithText from "./ColoredLineWithText";
+import { Roboto, Fruktur } from "@next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const fruktur = Fruktur({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
   const {
@@ -89,7 +100,9 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 <span>Location:</span> <span>{location}</span>
               </div>
             </section>
-            <section className={stylesCV.cv_section}>
+            <section
+              className={[stylesCV.cv_section, roboto.className].join(" ")}
+            >
               <ColoredLineWithText
                 color={colorFromResumeSetting}
                 text="Work Experience:"
@@ -106,7 +119,9 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 ))}
               </div>
             </section>
-            <section className={stylesCV.cv_section}>
+            <section
+              className={[stylesCV.cv_section, fruktur.className].join(" ")}
+            >
               <ColoredLineWithText
                 color={colorFromResumeSetting}
                 text="Education:"
