@@ -24,6 +24,7 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
     educations,
     skills,
     selectedColor,
+    selectedFont,
   } = data;
 
   const pdfExportComponent = useRef(null);

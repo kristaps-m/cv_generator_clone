@@ -171,6 +171,11 @@ export default function Home() {
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
   };
+
+  const [selectedFont, setSelectedFont] = useState<string>("Arial");
+  const handleFontSelect = (font: string) => {
+    setSelectedFont(font);
+  };
   // ---------------------------- ResumeSetting ^^
 
   const combinedData = {
@@ -179,6 +184,7 @@ export default function Home() {
     educations,
     skills,
     selectedColor,
+    selectedFont,
   };
 
   return (
@@ -224,7 +230,10 @@ export default function Home() {
                   handleRemoveSkill={handleRemoveSkill}
                 />
                 <br />
-                <ResumeSetting onSelectColor={handleColorSelect} />
+                <ResumeSetting
+                  onSelectColor={handleColorSelect}
+                  onSelectFont={handleFontSelect}
+                />
               </Box>
             </Paper>
           </Grid>

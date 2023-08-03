@@ -11,7 +11,7 @@ import ITemplateProps from "./ITemplateProps";
 import { Box, Grid, Rating, Typography } from "@mui/material";
 import { defaultColor } from "../constants";
 import ColoredLineWithText from "./ColoredLineWithText";
-import { Roboto, Fruktur } from "@next/font/google";
+import { Roboto, Fruktur, Courier_Prime } from "@next/font/google";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -21,6 +21,11 @@ const roboto = Roboto({
 const fruktur = Fruktur({
   subsets: ["latin"],
   weight: ["400"],
+});
+
+const courier_prime = Courier_Prime({
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
@@ -38,6 +43,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
     educations,
     skills,
     selectedColor,
+    selectedFont,
   } = data;
 
   const pdfExportComponent = useRef(null);
@@ -138,11 +144,17 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 ))}
               </div>
             </section>
-            <section className={stylesCV.cv_section}>
+            <section
+              className={[stylesCV.cv_section, courier_prime.className].join(
+                " "
+              )}
+            >
               <ColoredLineWithText
                 color={colorFromResumeSetting}
                 text="Skills:"
               />
+              <h1>TEST adasdasd</h1>
+              <p>ipsum asdad asd asdadmaoid a</p>
               <div className={stylesCV.workItem}>
                 <Grid container spacing={2}>
                   {skills.map((skill, index) => (
@@ -160,6 +172,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
             </section>
             <section>
               <h1>Selected color: {selectedColor}</h1>
+              <h1>Selected Font: {selectedFont}</h1>
             </section>
           </div>
         </div>
