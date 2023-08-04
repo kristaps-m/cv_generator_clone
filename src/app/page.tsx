@@ -5,7 +5,7 @@ import { ChangeEvent, useState } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import TemplateSelector from "./components/TemplateSelector";
 import React from "react";
-import { Box, Grid, Paper } from "@mui/material";
+import { Box, Button, Grid, Paper } from "@mui/material";
 import BasicInfo from "./components/BasicInfo";
 import WorkExperience from "./components/WorkExperience";
 import Education from "./components/Education";
@@ -13,6 +13,9 @@ import Skills from "./components/Skills";
 import ResumeSetting from "./components/ResumeSetting";
 import { handleRemoveElement } from "./utils";
 import { lightblueBackgroundAllBoxes } from "./constants";
+import Link from "next/link";
+import router, { useRouter } from "next/router";
+import dynamic from "next/dynamic"; // Import dynamic from next/dynamic
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({
@@ -186,13 +189,21 @@ export default function Home() {
     selectedFont,
   };
 
+  const xsForGridColOne = 5;
+  const xsForGridColTwo = 4;
+
   return (
     <div>
-      <h2>CV Generator </h2>
-      <p>------------------------------------</p>
+      {/* Header */}
+      <Box p={4} sx={{ border: "1px solid grey" }}>
+        <header>
+          <h1>CV Generator</h1>
+        </header>
+      </Box>
+      {/* Main content */}
       <div>
-        <Grid container spacing={2}>
-          <Grid xs={6}>
+        <Grid container spacing={2} marginTop={1}>
+          <Grid xs={xsForGridColOne}>
             <Paper elevation={3}>
               <Box
                 p={1}
@@ -236,19 +247,24 @@ export default function Home() {
               </Box>
             </Paper>
           </Grid>
-          <Grid xs={6}>
+          <Grid xs={xsForGridColTwo}>
             <TemplateSelector data={combinedData} />
           </Grid>
         </Grid>
 
         {/* <button onClick={handleAddInput}>Add Input</button> */}
       </div>
-      <p>------------------------------------</p>
       {/* <h1>TEST</h1>
       <h1>
         {cvData.firstName}, {workExperiences[0].company},
         {workExperiences[1]?.company}
       </h1> */}
+      {/* Footer */}
+      <Box p={2} sx={{ border: "1px solid grey" }}>
+        <footer>
+          <h1>Footer</h1>
+        </footer>
+      </Box>
     </div>
   );
 }

@@ -58,14 +58,10 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
       ? defaultColor
       : selectedColor;
 
+  const marginBottonValue = "5px";
+
   return (
     <div>
-      <div className="button-area">
-        <Button themeColor={"primary"} onClick={handleExportWithComponent}>
-          Save as PDF
-        </Button>
-        <Button>Default Button</Button>
-      </div>
       <PDFExport ref={pdfExportComponent} paperSize="A4">
         {/* A4-sized rectangle */}
         <div
@@ -75,14 +71,15 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
             height: "297mm",
             position: "relative",
           }}
+          // className={styles.page}
         >
-          {/* <Head>
-            <title>Your Name - CV</title>
-            <link
-              rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-            />
-          </Head> */}
+          <Box
+            sx={{
+              width: "100%",
+              height: 20,
+              backgroundColor: colorFromResumeSetting,
+            }}
+          ></Box>
           <div className={stylesCV.cv} style={{ fontFamily: selectedFont }}>
             <header className={stylesCV.cv_header}>
               <h1>
@@ -97,16 +94,16 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 text="Personal Information:"
                 selectedFont={selectedFont}
               />
-              <div className={stylesCV.infoItem}>
+              <div className={stylesCV.workItem}>
                 <span>Phone:</span> <span>{phone}</span>
               </div>
-              <div className={stylesCV.infoItem}>
+              <div className={stylesCV.workItem}>
                 <span>Email:</span> <span>{email}</span>
               </div>
-              <div className={stylesCV.infoItem}>
+              <div className={stylesCV.workItem}>
                 <span>LinkedIn:</span> <span>{linkedIn}</span>
               </div>
-              <div className={stylesCV.infoItem}>
+              <div className={stylesCV.workItem}>
                 <span>Location:</span> <span>{location}</span>
               </div>
             </section>
@@ -118,12 +115,13 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
               />
               <div className={stylesCV.workItem}>
                 {workExperiences.map((experience, index) => (
-                  <div key={index}>
-                    <p>{`Company: ${experience.company}`}</p>
+                  <div key={index} style={{ marginBottom: marginBottonValue }}>
+                    <p
+                      className={stylesCV.infoItem}
+                    >{`Company: ${experience.company}`}</p>
                     <p>{`Job Title: ${experience.jobTitle}`}</p>
                     <p>{`Date: ${experience.date}`}</p>
                     <p>{`Description: ${experience.description}`}</p>
-                    <br></br>
                   </div>
                 ))}
               </div>
@@ -136,12 +134,13 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
               />
               <div className={stylesCV.workItem}>
                 {educations.map((experience, index) => (
-                  <div key={index}>
-                    <p>{`Scool: ${experience.school}`}</p>
+                  <div key={index} style={{ marginBottom: marginBottonValue }}>
+                    <p
+                      className={stylesCV.infoItem}
+                    >{`Scool: ${experience.school}`}</p>
                     <p>{`Degree And Major: ${experience.degreeAndMajor}`}</p>
                     <p>{`Date: ${experience.schoolDate}`}</p>
                     <p>{`Achievements: ${experience.achievements}`}</p>
-                    <br></br>
                   </div>
                 ))}
               </div>
@@ -167,13 +166,14 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 </Grid>
               </div>
             </section>
-            <section>
-              <h1>Selected color: {selectedColor}</h1>
-              <h1>Selected Font: {selectedFont}</h1>
-            </section>
           </div>
         </div>
       </PDFExport>
+      <div className="button-area">
+        <Button themeColor={"primary"} onClick={handleExportWithComponent}>
+          Save as PDF
+        </Button>
+      </div>
     </div>
   );
 };
