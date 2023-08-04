@@ -33,10 +33,10 @@ const Education: React.FC<IEducationProps> = ({
   return (
     <Paper elevation={3}>
       <Box p={2} sx={{ backgroundColor: grayBackgroundForBox }}>
+        <Box p={2}>
         <Typography variant="h5">Education:</Typography>
         <Grid item xs={12}>
           <Grid item xs={12}>
-            <h1>Education:</h1>
           </Grid>
           {/* Education List */}
           {educations.map((experience, index) => (
@@ -104,6 +104,7 @@ const Education: React.FC<IEducationProps> = ({
             Add Education
           </Button>
         </Grid>
+        </Box>        
       </Box>
     </Paper>
   );

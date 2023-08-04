@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import { defaultColor, grayBackgroundForBox } from "../constants";
+import Grid from "@mui/material/Grid";
 
 interface ColorPaletteProps {
   onSelectColor: (color: string) => void;
@@ -53,40 +54,60 @@ const ResumeSetting: React.FC<ColorPaletteProps> = ({
     onSelectFont(font); // Pass the selected font to the parent component
   };
 
+  let colorFromResumeSetting =
+  selectedColor === "" || selectedColor === null
+    ? defaultColor
+    : selectedColor;
+
   return (
     <Paper elevation={3}>
       <Box p={2} sx={{ backgroundColor: grayBackgroundForBox }}>
-        <Typography variant="h5">Resume Setting:</Typography>
-        {colors.map((color) => (
-          <button
-            key={color}
-            style={{
-              width: "50px",
-              height: "50px",
-              backgroundColor: color,
-              border: selectedColor === color ? "2px solid black" : "none",
-            }}
-            onClick={() => handleColorClick(color)}
-          />
-        ))}
-        <div>Selected color: {selectedColor || defaultColor}</div>
-
-        <div>
-          <h3>Font Family:</h3>
-          {fontFamilies.map((font) => (
+        <Box p={2}>
+          <Typography variant="h5">Resume Setting:</Typography><br />
+          <span style={{ display: "flex", alignItems: "center", marginBottom: "8px"}}>
+          <Typography variant="h6" marginRight={3}>Theme Color:</Typography>
+          <Box bgcolor="gray">
+          <Typography variant="h6">{selectedColor || defaultColor}</Typography>
+          </Box>
+          </span>
+          {colors.map((color) => (
             <button
-              key={font}
+              key={color}
               style={{
-                fontFamily: font,
-                padding: "5px",
-                border: selectedFont === font ? "2px solid black" : "none",
+                width: "45px",
+                height: "45px",
+                backgroundColor: color,
+                borderRadius: "12px",
+                // padding: "2px",
+                margin: "2px 2px",
+                border: selectedColor === color ? "2px solid black" : "none",
               }}
-              onClick={() => handleFontClick(font)}
-            >
-              {font}
-            </button>
-          ))}
-        </div>
+              onClick={() => handleColorClick(color)}
+            />
+          ))}    
+        </Box>            
+        <Box p={2}>
+          <Typography variant="h6">Font Family:</Typography>
+          <Grid container spacing={1}>
+            {fontFamilies.map((font) => (
+              <Grid item key={font}>
+                <button
+                    key={font}
+                    style={{
+                      backgroundColor: selectedFont === font ? colorFromResumeSetting : "transparent",
+                      fontFamily: font,
+                      padding: "5px",
+                      border: selectedFont === font ? "4px solid black" : "1px solid gray",
+                    }}
+                    onClick={() => handleFontClick(font)}
+                  >
+                    {font}
+                  </button>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+        
       </Box>
     </Paper>
   );

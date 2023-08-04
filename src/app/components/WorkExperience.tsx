@@ -32,6 +32,7 @@ const WorkExperience: React.FC<IWorkExperienceProps> = ({
   return (
     <Paper elevation={3}>
       <Box p={2} sx={{ backgroundColor: grayBackgroundForBox }}>
+        <Box p={2}>
         <Typography variant="h5">Work Experience:</Typography>
         <Grid item xs={12}>
           {/* Work Experience List */}
@@ -100,6 +101,7 @@ const WorkExperience: React.FC<IWorkExperienceProps> = ({
             Add Work Experience
           </Button>
         </Grid>
+        </Box>        
       </Box>
     </Paper>
   );

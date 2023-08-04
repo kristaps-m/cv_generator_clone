@@ -13,7 +13,6 @@ import Skills from "./components/Skills";
 import ResumeSetting from "./components/ResumeSetting";
 import { handleRemoveElement } from "./utils";
 import { lightblueBackgroundAllBoxes } from "./constants";
-import styles from "./styles.module.css";
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({

@@ -54,6 +54,7 @@ const Skills: React.FC<ISkillsProps> = ({
   return (
     <Paper elevation={3}>
       <Box p={2} sx={{ backgroundColor: grayBackgroundForBox }}>
+        <Box p={2}>
         <Typography variant="h5">Skills:</Typography>
         {skills.map((skill, index) => (
           <div key={index}>
@@ -87,6 +88,8 @@ const Skills: React.FC<ISkillsProps> = ({
         <Button onClick={handleAddSkill} color="success">
           Add Skill
         </Button>
+        </Box>
+        
       </Box>
     </Paper>
   );

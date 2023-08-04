@@ -13,6 +13,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ data, handleInputChange }) => {
   return (
     <Paper elevation={3}>
       <Box p={2} sx={{ backgroundColor: grayBackgroundForBox }}>
+        <Box p={2}>
         <Typography variant="h5">Basic Info:</Typography>
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -103,6 +104,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ data, handleInputChange }) => {
             />
           </Grid>
         </Grid>
+        </Box>        
       </Box>
     </Paper>
   );
