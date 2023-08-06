@@ -1,9 +1,13 @@
 import TextField from "@mui/material/TextField";
 import React, { ChangeEvent } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Button, Slider } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { Button, Grid, Slider } from "@mui/material";
 import { Box, Paper, Typography } from "@mui/material";
-import { grayBackgroundForBox } from "../constants";
+import {
+  elementInputLabelAndButtonSize,
+  grayBackgroundForBox,
+} from "../constants";
 
 const marks = [
   {
@@ -51,45 +55,102 @@ const Skills: React.FC<ISkillsProps> = ({
   handleAddSkill,
   handleRemoveSkill,
 }) => {
+  const [hovered, setHovered] = React.useState(
+    new Array(skills.length).fill(false)
+  );
+
   return (
     <Paper elevation={3}>
       <Box p={2} sx={{ backgroundColor: grayBackgroundForBox }}>
         <Box p={2}>
-        <Typography variant="h5">Skills:</Typography>
-        {skills.map((skill, index) => (
-          <div key={index}>
-            <TextField
-              label="Skill Name"
-              name={`skills[${index}].name`}
-              value={skill.name}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleSkillNameChange(index, e)
-              }
-              variant="standard"
-            />
-            <Button onClick={() => handleRemoveSkill(index)}>
-              <DeleteIcon />
-            </Button>
-            <Slider
-              value={skill.strength}
-              onChange={(event: Event, value: number | number[]) => {
-                // Check if the value is an array (multi-value slider)
-                const newValue = typeof value === "number" ? value : value[0];
-                handleSkillStrengthChange(index, newValue);
-              }}
-              min={1}
-              max={5}
-              step={1}
-              marks={marks}
-              valueLabelDisplay="auto"
-            />
-          </div>
-        ))}
-        <Button onClick={handleAddSkill} color="success">
-          Add Skill
-        </Button>
+          <Typography variant="h5">Skills:</Typography>
+          {skills.map((skill, index) => (
+            <div key={index}>
+              <Grid container spacing={2}>
+                <Grid item xs={10}>
+                  <TextField
+                    label="Skill Name"
+                    name={`skills[${index}].name`}
+                    value={skill.name}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      handleSkillNameChange(index, e)
+                    }
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  <Button
+                    onMouseEnter={() => {
+                      const updatedHovered = [...hovered];
+                      updatedHovered[index] = true;
+                      setHovered(updatedHovered);
+                    }}
+                    onMouseLeave={() => {
+                      const updatedHovered = [...hovered];
+                      updatedHovered[index] = false;
+                      setHovered(updatedHovered);
+                    }}
+                    onClick={() => handleRemoveSkill(index)}
+                    sx={{
+                      padding: 0,
+                      marginBottom: 0,
+                      marginRight: 0,
+                      position: "relative",
+                    }}
+                  >
+                    <DeleteForeverIcon
+                      sx={{
+                        marginBottom: 0,
+                        marginRight: 0,
+                        padding: 0,
+                        fontSize: elementInputLabelAndButtonSize,
+                      }}
+                    />
+                    {hovered[index] && (
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                          backgroundColor: "rgba(0, 0, 0, 0.7)",
+                          color: "#fff",
+                          padding: "2px 4px",
+                          borderRadius: 4,
+                          zIndex: 1,
+                        }}
+                      >
+                        DELETE
+                      </Typography>
+                    )}
+                  </Button>
+                </Grid>
+                <Grid item xs={11}>
+                  <Slider
+                    value={skill.strength}
+                    onChange={(event: Event, value: number | number[]) => {
+                      // Check if the value is an array (multi-value slider)
+                      const newValue =
+                        typeof value === "number" ? value : value[0];
+                      handleSkillStrengthChange(index, newValue);
+                    }}
+                    min={1}
+                    max={5}
+                    step={1}
+                    marks={marks}
+                    valueLabelDisplay="auto"
+                    sx={{ marginBottom: 6 }}
+                  />
+                </Grid>
+              </Grid>
+            </div>
+          ))}
+          <Button onClick={handleAddSkill} color="success">
+            <AddIcon sx={{ marginRight: "8px" }} />
+            Add Skill
+          </Button>
         </Box>
-        
       </Box>
     </Paper>
   );

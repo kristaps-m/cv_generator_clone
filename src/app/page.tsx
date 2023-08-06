@@ -262,7 +262,34 @@ export default function Home() {
       {/* Footer */}
       <Box p={2} sx={{ border: "1px solid grey" }}>
         <footer>
-          <h1>Footer</h1>
+          <h1>
+            Made by: <b>Kristaps M.</b>
+          </h1>
+          <div>
+            <a
+              href="https://github.com/kristaps-m"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>{" "}
+            |{" "}
+            <a
+              href="https://www.linkedin.com/in/kristaps-mitins"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>{" "}
+            |{" "}
+            <a
+              href="https://github.com/kristaps-m/cv_generator_clone"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Source code
+            </a>{" "}
+          </div>
         </footer>
       </Box>
     </div>

@@ -17,7 +17,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ data, handleInputChange }) => {
           <Typography variant="h5">Basic Info:</Typography>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <InputLabel htmlFor="fullWidth">First Name</InputLabel>
+              {/* <InputLabel htmlFor="fullWidth">First Name</InputLabel>
               <Input
                 id="fullWidth"
                 name="firstName"
@@ -25,16 +25,16 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ data, handleInputChange }) => {
                 onChange={handleInputChange}
                 placeholder="Enter your first name"
                 fullWidth
+              /> */}
+              <TextField
+                id="fullWidth"
+                label="First Name"
+                name="firstName"
+                value={data.firstName}
+                onChange={handleInputChange}
+                variant="standard"
+                placeholder="Enter your first name"
               />
-              {/* <TextField
-              id="fullWidth"
-              label="First Name"
-              name="firstName"
-              value={data.firstName}
-              onChange={handleInputChange}
-              variant="standard"
-              placeholder="Enter your first name"
-            /> */}
             </Grid>
             <Grid item xs={6}>
               <TextField

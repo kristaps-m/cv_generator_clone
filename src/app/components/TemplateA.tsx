@@ -110,14 +110,14 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
             <section className={stylesCV.cv_section}>
               <ColoredLineWithText
                 color={colorFromResumeSetting}
-                text="Work Experience:"
+                text="WORK EXPERIENCE:"
                 selectedFont={selectedFont}
               />
               <div className={stylesCV.workItem}>
                 {workExperiences.map((experience, index) => (
                   <div key={index} style={{ marginBottom: marginBottonValue }}>
                     <p
-                      className={stylesCV.infoItem}
+                      style={{ fontWeight: "bolder" }}
                     >{`Company: ${experience.company}`}</p>
                     <p>{`Job Title: ${experience.jobTitle}`}</p>
                     <p>{`Date: ${experience.date}`}</p>
@@ -129,14 +129,14 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
             <section className={stylesCV.cv_section}>
               <ColoredLineWithText
                 color={colorFromResumeSetting}
-                text="Education:"
+                text="EDUCATION:"
                 selectedFont={selectedFont}
               />
               <div className={stylesCV.workItem}>
                 {educations.map((experience, index) => (
                   <div key={index} style={{ marginBottom: marginBottonValue }}>
                     <p
-                      className={stylesCV.infoItem}
+                      style={{ fontWeight: "bolder" }}
                     >{`Scool: ${experience.school}`}</p>
                     <p>{`Degree And Major: ${experience.degreeAndMajor}`}</p>
                     <p>{`Date: ${experience.schoolDate}`}</p>
@@ -148,7 +148,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
             <section className={stylesCV.cv_section}>
               <ColoredLineWithText
                 color={colorFromResumeSetting}
-                text="Skills:"
+                text="SKILLS:"
                 selectedFont={selectedFont}
               />
               <div className={stylesCV.workItem}>
