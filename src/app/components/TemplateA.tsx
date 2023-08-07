@@ -8,7 +8,7 @@ import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import Head from "next/head";
 import ITemplateProps from "./ITemplateProps";
 import { Box, Grid, Rating, Typography } from "@mui/material";
-import { defaultColor } from "../constants";
+import { defaultColor, defaultFonstSize } from "../constants";
 import ColoredLineWithText from "./ColoredLineWithText";
 
 const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
@@ -79,6 +79,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 color={colorFromResumeSetting}
                 text="Personal Information:"
                 selectedFont={selectedFont}
+                fontSizeNumber={defaultFonstSize}
               />
               <div className={stylesCV.workItem}>
                 <span>Phone:</span> <span>{phone}</span>
@@ -98,6 +99,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 color={colorFromResumeSetting}
                 text="WORK EXPERIENCE:"
                 selectedFont={selectedFont}
+                fontSizeNumber={defaultFonstSize}
               />
               <div className={stylesCV.workItem}>
                 {workExperiences.map((experience, index) => (
@@ -117,6 +119,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 color={colorFromResumeSetting}
                 text="EDUCATION:"
                 selectedFont={selectedFont}
+                fontSizeNumber={defaultFonstSize}
               />
               <div className={stylesCV.workItem}>
                 {educations.map((experience, index) => (
@@ -136,6 +139,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 color={colorFromResumeSetting}
                 text="SKILLS:"
                 selectedFont={selectedFont}
+                fontSizeNumber={defaultFonstSize}
               />
               <div className={stylesCV.workItem}>
                 <Grid container spacing={2}>

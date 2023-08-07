@@ -51,13 +51,11 @@
 
 .fontSizeSmall {
   font-size: 4px;
-  /* Adjust the font size value as needed */
 }
 
 .fontSizeSmallHeader {
-  font-size: 4px;
+  /* font-size: 4px; */
   text-align: center;
   margin-bottom: 20px;
   font-weight: 400;
-  /* Adjust the font size value as needed */
 }

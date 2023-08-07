@@ -12,7 +12,7 @@ import Education from "./components/Education";
 import Skills from "./components/Skills";
 import ResumeSetting from "./components/ResumeSetting";
 import { handleRemoveElement } from "./utils";
-import { lightblueBackgroundAllBoxes } from "./constants";
+import { defaultFonstSize, lightblueBackgroundAllBoxes } from "./constants";
 import router, { useRouter } from "next/router";
 
 export default function Home() {
@@ -177,7 +177,8 @@ export default function Home() {
     setSelectedFont(font);
   };
 
-  const [fontSizeNumber, setFontSizeNumber] = useState<number>(14);
+  const [fontSizeNumber, setFontSizeNumber] =
+    useState<number>(defaultFonstSize);
   const handleSizeNumber = (size: number) => {
     setFontSizeNumber(size);
   };

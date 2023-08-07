@@ -41,6 +41,19 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
 
   const marginBottonValue = "5px";
 
+  const maxMinNumber = (n: number) => {
+    if (n < 4) {
+      return 4;
+    } else if (n > 35) {
+      return 35;
+    } else {
+      return n;
+    }
+  };
+
+  let test = maxMinNumber(fontSizeNumber);
+  //fontSizeNumber = maxMinNumber(fontSizeNumber);
+
   return (
     <div>
       <PDFExport ref={pdfExportComponent} paperSize="A4">
@@ -61,11 +74,18 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
               backgroundColor: colorFromResumeSetting,
             }}
           ></Box>
+          <div>
+            <h1 style={{ fontSize: test }}>XXX</h1>
+          </div>
           <div
-            className={[stylesCV.cv, stylesCV.fontSizeSmall].join(" ")}
-            style={{ fontFamily: selectedFont }}
+            // className={[stylesCV.cv, stylesCV.fontSizeSmall].join(" ")}
+            className={stylesCV.cv}
+            style={{ fontFamily: selectedFont, fontSize: fontSizeNumber }}
           >
-            <header className={[stylesCV.fontSizeSmallHeader].join(" ")}>
+            <header
+              className={[stylesCV.fontSizeSmallHeader].join(" ")}
+              style={{ fontSize: fontSizeNumber + 4 }}
+            >
               <h1>
                 {firstName} {lastName}
               </h1>
@@ -79,6 +99,7 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
                 color={colorFromResumeSetting}
                 text="Personal Information:"
                 selectedFont={selectedFont}
+                fontSizeNumber={fontSizeNumber}
               />
               <div className={stylesCV.workItem}>
                 <span>Phone:</span> <span>{phone}</span>
@@ -98,6 +119,7 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
                 color={colorFromResumeSetting}
                 text="WORK EXPERIENCE:"
                 selectedFont={selectedFont}
+                fontSizeNumber={fontSizeNumber}
               />
               <div className={stylesCV.workItem}>
                 {workExperiences.map((experience, index) => (
@@ -117,6 +139,7 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
                 color={colorFromResumeSetting}
                 text="EDUCATION:"
                 selectedFont={selectedFont}
+                fontSizeNumber={fontSizeNumber}
               />
               <div className={stylesCV.workItem}>
                 {educations.map((experience, index) => (
@@ -136,6 +159,7 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
                 color={colorFromResumeSetting}
                 text="SKILLS:"
                 selectedFont={selectedFont}
+                fontSizeNumber={fontSizeNumber}
               />
               <div className={stylesCV.workItem}>
                 <Grid container spacing={2}>
@@ -146,7 +170,8 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
                         name="read-only"
                         value={skill.strength}
                         readOnly
-                        className={stylesCV.fontSizeSmallHeader}
+                        // className={stylesCV.fontSizeSmallHeader}
+                        style={{ fontSize: fontSizeNumber }}
                       />
                     </Grid>
                   ))}

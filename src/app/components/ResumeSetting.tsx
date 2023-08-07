@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import { Box, Input, Paper, Typography } from "@mui/material";
-import { defaultColor, grayBackgroundForBox } from "../constants";
+import { Box, Input, InputLabel, Paper, Typography } from "@mui/material";
+import {
+  defaultColor,
+  defaultFonstSize,
+  grayBackgroundForBox,
+} from "../constants";
 import Grid from "@mui/material/Grid";
 
-interface ColorPaletteProps {
+interface IResumeSettingProps {
   onSelectColor: (color: string) => void;
   onSelectFont: (font: string) => void;
   onSelectFontSizeNumber: (size: number) => void;
 }
 
-const ResumeSetting: React.FC<ColorPaletteProps> = ({
+const ResumeSetting: React.FC<IResumeSettingProps> = ({
   onSelectColor,
   onSelectFont,
   onSelectFontSizeNumber,
@@ -18,7 +22,8 @@ const ResumeSetting: React.FC<ColorPaletteProps> = ({
 
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedFont, setSelectedFont] = useState<string>(defaultFont);
-  const [fontSizeNumber, setFontSizeNumber] = useState<number>(14);
+  const [fontSizeNumber, setFontSizeNumber] =
+    useState<number>(defaultFonstSize);
 
   const colors = [
     "#f87171",
@@ -131,15 +136,30 @@ const ResumeSetting: React.FC<ColorPaletteProps> = ({
               </Grid>
             ))}
           </Grid>
-          <Input
-            id="fullWidth"
-            name="font size"
-            value={fontSizeNumber}
-            onChange={(e: any) => handleSizeNumber(e)}
-            placeholder="Font Size"
-            fullWidth
-            sx={{ marginTop: 0 }}
-          />
+          <div>
+            <InputLabel
+              htmlFor="fullWidth"
+              sx={{
+                marginTop: 6,
+                marginBottom: 0,
+              }}
+            >
+              <Typography variant="h6">FontSize:</Typography>
+            </InputLabel>
+            <Input
+              id="fullWidth"
+              name="fontSizeNumber"
+              value={isNaN(fontSizeNumber) ? "" : fontSizeNumber.toString()}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const newSize =
+                  e.target.value !== "" ? parseInt(e.target.value, 10) : NaN;
+                handleSizeNumber(newSize);
+              }}
+              placeholder="Font Size"
+              fullWidth
+              sx={{ marginTop: 0 }}
+            />
+          </div>
         </Box>
       </Box>
     </Paper>
