@@ -1,13 +1,12 @@
-// components/TemplateB.tsx
 import React from "react";
 import { useRef } from "react";
-import { Icon } from "@progress/kendo-react-common";
-import styles from "../styles.module.css";
 import stylesCV from "./CVTemplate.module.css";
 import { Button } from "@progress/kendo-react-buttons";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import ITemplateProps from "./ITemplateProps";
-import { colors } from "@mui/material";
+import { Box, Grid, Rating, Typography } from "@mui/material";
+import { defaultColor } from "../constants";
+import ColoredLineWithText from "./ColoredLineWithText";
 
 const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
   const {
@@ -25,6 +24,7 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
     skills,
     selectedColor,
     selectedFont,
+    fontSizeNumber,
   } = data;
 
   const pdfExportComponent = useRef(null);
@@ -34,14 +34,15 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
     pdfExportComponent.current.save();
   };
 
+  let colorFromResumeSetting =
+    selectedColor === "" || selectedColor === null
+      ? defaultColor
+      : selectedColor;
+
+  const marginBottonValue = "5px";
+
   return (
     <div>
-      <div className="button-area">
-        <Button themeColor={"primary"} onClick={handleExportWithComponent}>
-          Save as PDF
-        </Button>
-        <Button>Default Button</Button>
-      </div>
       <PDFExport ref={pdfExportComponent} paperSize="A4">
         {/* A4-sized rectangle */}
         <div
@@ -51,52 +52,115 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
             height: "297mm",
             position: "relative",
           }}
+          // className={styles.page}
         >
-          <h1 className={styles.templateB}>TEMPLATE -B-</h1>
-          <div>
-            <h3 className={styles.templateB}>CV</h3>
-            <p>
-              Name: {firstName} {lastName}
-            </p>
-            <p className={styles.templateB}>Position: {position}</p>
-            <p>Email: {email}</p>
-            <p>Phone: {phone}</p>
-            <p>
-              {<Icon name="linkedin" />} LinkedIn: {linkedIn}
-            </p>
-            <p>Summary: {summary}</p>
+          <Box
+            sx={{
+              width: "100%",
+              height: 20,
+              backgroundColor: colorFromResumeSetting,
+            }}
+          ></Box>
+          <div
+            className={[stylesCV.cv, stylesCV.fontSizeSmall].join(" ")}
+            style={{ fontFamily: selectedFont }}
+          >
+            <header className={[stylesCV.fontSizeSmallHeader].join(" ")}>
+              <h1>
+                {firstName} {lastName}
+              </h1>
+              <p>{position}</p>
+              <p>
+                <b>-B-</b>Experience: {yearsOfExperience} years
+              </p>
+            </header>
+            <section className={stylesCV.cv_section}>
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="Personal Information:"
+                selectedFont={selectedFont}
+              />
+              <div className={stylesCV.workItem}>
+                <span>Phone:</span> <span>{phone}</span>
+              </div>
+              <div className={stylesCV.workItem}>
+                <span>Email:</span> <span>{email}</span>
+              </div>
+              <div className={stylesCV.workItem}>
+                <span>LinkedIn:</span> <span>{linkedIn}</span>
+              </div>
+              <div className={stylesCV.workItem}>
+                <span>Location:</span> <span>{location}</span>
+              </div>
+            </section>
+            <section className={stylesCV.cv_section}>
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="WORK EXPERIENCE:"
+                selectedFont={selectedFont}
+              />
+              <div className={stylesCV.workItem}>
+                {workExperiences.map((experience, index) => (
+                  <div key={index} style={{ marginBottom: marginBottonValue }}>
+                    <p
+                      style={{ fontWeight: "bolder" }}
+                    >{`Company: ${experience.company}`}</p>
+                    <p>{`Job Title: ${experience.jobTitle}`}</p>
+                    <p>{`Date: ${experience.date}`}</p>
+                    <p>{`Description: ${experience.description}`}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section className={stylesCV.cv_section}>
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="EDUCATION:"
+                selectedFont={selectedFont}
+              />
+              <div className={stylesCV.workItem}>
+                {educations.map((experience, index) => (
+                  <div key={index} style={{ marginBottom: marginBottonValue }}>
+                    <p
+                      style={{ fontWeight: "bolder" }}
+                    >{`Scool: ${experience.school}`}</p>
+                    <p>{`Degree And Major: ${experience.degreeAndMajor}`}</p>
+                    <p>{`Date: ${experience.schoolDate}`}</p>
+                    <p>{`Achievements: ${experience.achievements}`}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section className={stylesCV.cv_section}>
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="SKILLS:"
+                selectedFont={selectedFont}
+              />
+              <div className={stylesCV.workItem}>
+                <Grid container spacing={2}>
+                  {skills.map((skill, index) => (
+                    <Grid key={index} item xs={4}>
+                      <p>{skill.name}</p>
+                      <Rating
+                        name="read-only"
+                        value={skill.strength}
+                        readOnly
+                        className={stylesCV.fontSizeSmallHeader}
+                      />
+                    </Grid>
+                  ))}
+                </Grid>
+              </div>
+            </section>
           </div>
-          <br></br>
-          <section className={stylesCV.cv_section}>
-            <h2>Work Experience</h2>
-            <div className={stylesCV.workItem}>
-              {workExperiences.map((experience, index) => (
-                <div key={index}>
-                  <p>{`Company: ${experience.company}`}</p>
-                  <p>{`Job Title: ${experience.jobTitle}`}</p>
-                  <p>{`Date: ${experience.date}`}</p>
-                  <p>{`Description: ${experience.description}`}</p>
-                  <br></br>
-                </div>
-              ))}
-            </div>
-          </section>
-          <section className={stylesCV.cv_section}>
-            <h2>Education</h2>
-            <div className={stylesCV.workItem}>
-              {educations.map((experience, index) => (
-                <div key={index}>
-                  <p>{`Scool: ${experience.school}`}</p>
-                  <p>{`Degree And Major: ${experience.degreeAndMajor}`}</p>
-                  <p>{`Date: ${experience.schoolDate}`}</p>
-                  <p>{`Achievements: ${experience.achievements}`}</p>
-                  <br></br>
-                </div>
-              ))}
-            </div>
-          </section>
         </div>
       </PDFExport>
+      <div className="button-area">
+        <Button themeColor={"primary"} onClick={handleExportWithComponent}>
+          Save as PDF
+        </Button>
+      </div>
     </div>
   );
 };

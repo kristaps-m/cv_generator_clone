@@ -1,21 +1,24 @@
 import React, { useState } from "react";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Input, Paper, Typography } from "@mui/material";
 import { defaultColor, grayBackgroundForBox } from "../constants";
 import Grid from "@mui/material/Grid";
 
 interface ColorPaletteProps {
   onSelectColor: (color: string) => void;
   onSelectFont: (font: string) => void;
+  onSelectFontSizeNumber: (size: number) => void;
 }
 
 const ResumeSetting: React.FC<ColorPaletteProps> = ({
   onSelectColor,
   onSelectFont,
+  onSelectFontSizeNumber,
 }) => {
   const defaultFont = "Arial";
 
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedFont, setSelectedFont] = useState<string>(defaultFont);
+  const [fontSizeNumber, setFontSizeNumber] = useState<number>(14);
 
   const colors = [
     "#f87171",
@@ -54,21 +57,37 @@ const ResumeSetting: React.FC<ColorPaletteProps> = ({
     onSelectFont(font); // Pass the selected font to the parent component
   };
 
+  const handleSizeNumber = (size: number) => {
+    setFontSizeNumber(size);
+    onSelectFontSizeNumber(size); // Pass the selected font size to the parent component
+  };
+
   let colorFromResumeSetting =
-  selectedColor === "" || selectedColor === null
-    ? defaultColor
-    : selectedColor;
+    selectedColor === "" || selectedColor === null
+      ? defaultColor
+      : selectedColor;
 
   return (
     <Paper elevation={3}>
       <Box p={2} sx={{ backgroundColor: grayBackgroundForBox }}>
         <Box p={2}>
-          <Typography variant="h5">Resume Setting:</Typography><br />
-          <span style={{ display: "flex", alignItems: "center", marginBottom: "8px"}}>
-          <Typography variant="h6" marginRight={3}>Theme Color:</Typography>
-          <Box bgcolor="gray">
-          <Typography variant="h6">{selectedColor || defaultColor}</Typography>
-          </Box>
+          <Typography variant="h5">Resume Setting:</Typography>
+          <br />
+          <span
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "8px",
+            }}
+          >
+            <Typography variant="h6" marginRight={3}>
+              Theme Color:
+            </Typography>
+            <Box bgcolor="gray">
+              <Typography variant="h6">
+                {selectedColor || defaultColor}
+              </Typography>
+            </Box>
           </span>
           {colors.map((color) => (
             <button
@@ -84,30 +103,44 @@ const ResumeSetting: React.FC<ColorPaletteProps> = ({
               }}
               onClick={() => handleColorClick(color)}
             />
-          ))}    
-        </Box>            
+          ))}
+        </Box>
         <Box p={2}>
           <Typography variant="h6">Font Family:</Typography>
           <Grid container spacing={1}>
             {fontFamilies.map((font) => (
               <Grid item key={font}>
                 <button
-                    key={font}
-                    style={{
-                      backgroundColor: selectedFont === font ? colorFromResumeSetting : "transparent",
-                      fontFamily: font,
-                      padding: "5px",
-                      border: selectedFont === font ? "4px solid black" : "1px solid gray",
-                    }}
-                    onClick={() => handleFontClick(font)}
-                  >
-                    {font}
-                  </button>
+                  key={font}
+                  style={{
+                    backgroundColor:
+                      selectedFont === font
+                        ? colorFromResumeSetting
+                        : "transparent",
+                    fontFamily: font,
+                    padding: "5px",
+                    border:
+                      selectedFont === font
+                        ? "4px solid black"
+                        : "1px solid gray",
+                  }}
+                  onClick={() => handleFontClick(font)}
+                >
+                  {font}
+                </button>
               </Grid>
             ))}
           </Grid>
+          <Input
+            id="fullWidth"
+            name="font size"
+            value={fontSizeNumber}
+            onChange={(e: any) => handleSizeNumber(e)}
+            placeholder="Font Size"
+            fullWidth
+            sx={{ marginTop: 0 }}
+          />
         </Box>
-        
       </Box>
     </Paper>
   );

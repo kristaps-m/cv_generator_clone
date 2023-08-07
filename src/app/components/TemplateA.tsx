@@ -1,4 +1,3 @@
-// components/TemplateA.tsx
 import React from "react";
 import { useRef } from "react";
 import { Icon } from "@progress/kendo-react-common";
@@ -11,22 +10,6 @@ import ITemplateProps from "./ITemplateProps";
 import { Box, Grid, Rating, Typography } from "@mui/material";
 import { defaultColor } from "../constants";
 import ColoredLineWithText from "./ColoredLineWithText";
-import { Roboto, Fruktur, Courier_Prime } from "@next/font/google";
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
-
-const fruktur = Fruktur({
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
-const courier_prime = Courier_Prime({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
 
 const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
   const {
@@ -44,6 +27,7 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
     skills,
     selectedColor,
     selectedFont,
+    fontSizeNumber,
   } = data;
 
   const pdfExportComponent = useRef(null);
@@ -86,6 +70,8 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
                 {firstName} {lastName}
               </h1>
               <p>{position}</p>
+              {/* TEST SELECTED FONT SIZE */}
+              <p>Font Size Number{fontSizeNumber}</p>
               <p>Experience: {yearsOfExperience} years</p>
             </header>
             <section className={stylesCV.cv_section}>

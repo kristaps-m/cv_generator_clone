@@ -13,9 +13,7 @@ import Skills from "./components/Skills";
 import ResumeSetting from "./components/ResumeSetting";
 import { handleRemoveElement } from "./utils";
 import { lightblueBackgroundAllBoxes } from "./constants";
-import Link from "next/link";
 import router, { useRouter } from "next/router";
-import dynamic from "next/dynamic"; // Import dynamic from next/dynamic
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({
@@ -178,6 +176,12 @@ export default function Home() {
   const handleFontSelect = (font: string) => {
     setSelectedFont(font);
   };
+
+  const [fontSizeNumber, setFontSizeNumber] = useState<number>(14);
+  const handleSizeNumber = (size: number) => {
+    setFontSizeNumber(size);
+  };
+
   // ---------------------------- ResumeSetting ^^
 
   const combinedData = {
@@ -187,6 +191,7 @@ export default function Home() {
     skills,
     selectedColor,
     selectedFont,
+    fontSizeNumber,
   };
 
   const xsForGridColOne = 5;
@@ -243,6 +248,7 @@ export default function Home() {
                 <ResumeSetting
                   onSelectColor={handleColorSelect}
                   onSelectFont={handleFontSelect}
+                  onSelectFontSizeNumber={handleSizeNumber}
                 />
               </Box>
             </Paper>

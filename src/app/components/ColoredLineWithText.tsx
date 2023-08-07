@@ -22,7 +22,10 @@ const ColoredLineWithText: React.FC<IColoredLineWithTextProps> = ({
           marginRight: "10px",
         }}
       ></Box>
-      <Typography variant="h6" style={{ fontFamily: selectedFont }}>
+      <Typography
+        variant="h6"
+        style={{ fontFamily: selectedFont, fontSize: 4 }}
+      >
         {text}
       </Typography>
     </span>

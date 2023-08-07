@@ -28,5 +28,6 @@ export default interface ITemplateProps {
     }[];
     selectedColor: string | null;
     selectedFont: string;
+    fontSizeNumber: number;
   };
 }
