@@ -4,6 +4,7 @@ import {
   defaultColor,
   defaultFonstSize,
   grayBackgroundForBox,
+  whiteColor,
 } from "../constants";
 import Grid from "@mui/material/Grid";
 
@@ -74,7 +75,7 @@ const ResumeSetting: React.FC<IResumeSettingProps> = ({
 
   return (
     <Paper elevation={3}>
-      <Box p={2} sx={{ backgroundColor: grayBackgroundForBox }}>
+      <Box p={2} sx={{ backgroundColor: whiteColor }}>
         <Box p={2}>
           <Typography variant="h5">Resume Setting:</Typography>
           <br />

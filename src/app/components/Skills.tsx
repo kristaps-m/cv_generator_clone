@@ -7,6 +7,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import {
   elementInputLabelAndButtonSize,
   grayBackgroundForBox,
+  whiteColor,
 } from "../constants";
 
 const marks = [
@@ -61,7 +62,7 @@ const Skills: React.FC<ISkillsProps> = ({
 
   return (
     <Paper elevation={3}>
-      <Box p={2} sx={{ backgroundColor: grayBackgroundForBox }}>
+      <Box p={2} sx={{ backgroundColor: whiteColor }}>
         <Box p={2}>
           <Typography variant="h5">Skills:</Typography>
           {skills.map((skill, index) => (

@@ -12,7 +12,11 @@ import Education from "./components/Education";
 import Skills from "./components/Skills";
 import ResumeSetting from "./components/ResumeSetting";
 import { handleRemoveElement } from "./utils";
-import { defaultFonstSize, lightblueBackgroundAllBoxes } from "./constants";
+import {
+  defaultFonstSize,
+  lightGrayBackground,
+  lightblueBackgroundAllBoxes,
+} from "./constants";
 import router, { useRouter } from "next/router";
 
 export default function Home() {
@@ -195,13 +199,13 @@ export default function Home() {
     fontSizeNumber,
   };
 
-  const xsForGridColOne = 5;
-  const xsForGridColTwo = 4;
+  const xsForGridColOne = 6;
+  const xsForGridColTwo = 6;
 
   return (
     <div>
       {/* Header */}
-      <Box p={4} sx={{ border: "1px solid grey" }}>
+      <Box p={3} sx={{ border: "1px solid grey" }}>
         <header>
           <h1>CV Generator</h1>
         </header>
@@ -214,7 +218,7 @@ export default function Home() {
               <Box
                 p={1}
                 sx={{
-                  backgroundColor: lightblueBackgroundAllBoxes,
+                  backgroundColor: lightGrayBackground,
                   overflowY: "auto", // Add this line to make the input section scrollable
                   maxHeight: "calc(100vh - 64px)", // Set a maximum height to prevent it from expanding beyond the viewport
                 }}
@@ -254,7 +258,10 @@ export default function Home() {
               </Box>
             </Paper>
           </Grid>
-          <Grid xs={xsForGridColTwo}>
+          <Grid
+            xs={xsForGridColTwo}
+            sx={{ backgroundColor: lightGrayBackground }}
+          >
             <TemplateSelector data={combinedData} />
           </Grid>
         </Grid>

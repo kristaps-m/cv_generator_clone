@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import ITemplateProps from "./ITemplateProps";
 import { Box, Input, InputLabel, Paper, Typography } from "@mui/material";
-import { grayBackgroundForBox } from "../constants";
+import { grayBackgroundForBox, whiteColor } from "../constants";
 
 interface BasicInfoProps extends ITemplateProps {
   handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -12,7 +12,7 @@ interface BasicInfoProps extends ITemplateProps {
 const BasicInfo: React.FC<BasicInfoProps> = ({ data, handleInputChange }) => {
   return (
     <Paper elevation={3}>
-      <Box p={2} sx={{ backgroundColor: grayBackgroundForBox }}>
+      <Box p={2} sx={{ backgroundColor: whiteColor }}>
         <Box p={2}>
           <Typography variant="h5">Basic Info:</Typography>
           <Grid container spacing={2}>

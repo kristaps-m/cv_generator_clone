@@ -8,6 +8,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import {
   elementInputLabelAndButtonSize,
   grayBackgroundForBox,
+  whiteColor,
 } from "../constants";
 
 interface IWorkExperienceData {
@@ -39,7 +40,7 @@ const WorkExperience: React.FC<IWorkExperienceProps> = ({
 
   return (
     <Paper elevation={3}>
-      <Box p={2} sx={{ backgroundColor: grayBackgroundForBox }}>
+      <Box p={2} sx={{ backgroundColor: whiteColor }}>
         <Box p={2}>
           <Typography variant="h5">Work Experience:</Typography>
           <Grid item xs={12}>
