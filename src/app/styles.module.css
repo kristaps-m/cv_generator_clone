@@ -41,16 +41,3 @@
   overflow-y: auto;
   /* Add any other styles for the content */
 }
-
-/* @font-face {
-  font-family: 'Fruktur';
-  src: url(../../asset/Fruktur/Fruktur-Italic.ttf) format('truetype');
-  src: url(../../asset/Fruktur/Fruktur-Regular.ttf) format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-.Fruktur {
-  font-family: 'Fruktur', cursive;
-} */
-/* 

@@ -1,16 +1,4 @@
-/*
----------------------------------------------------------------------------------
-	STRIPPED DOWN RESUME TEMPLATE
-    html resume
-
-    v0.9: 5/28/09
-
-    design and code by: thingsthatarebrown.com 
-                        (matt brown)
----------------------------------------------------------------------------------
-*/
-
-
+/* 
 .msg {
   padding: 10px;
   background: #222;
@@ -33,7 +21,6 @@
   background: #266400;
 }
 
-/* //-- yui-grids style overrides -- */
 body {
   font-family: Georgia;
   color: #444;
@@ -53,7 +40,6 @@ body {
   border-bottom: 1px solid #ccc;
 }
 
-/* //-- header, body, footer -- */
 #hd {
   margin: 2.5em 0 3em 0;
   padding-bottom: 1.5em;
@@ -70,7 +56,6 @@ body {
   margin-bottom: 2em;
 }
 
-/* //-- footer -- */
 #ft {
   padding: 1em 0 5em 0;
   font-size: 92%;
@@ -83,7 +68,6 @@ body {
   text-align: center;
 }
 
-/* //-- core typography and style -- */
 #hd h1 {
   font-size: 48px;
   text-transform: uppercase;
@@ -152,7 +136,6 @@ p.enlarge span {
 }
 
 
-/* //-- section styles -- */
 
 a#pdf {
   display: block;
@@ -225,11 +208,10 @@ a#pdf:hover {
   margin-top: 20px
 }
 
-/* --// override to force 1/8th width grids -- */
 .yui-gf .yui-u {
   width: 80.2%;
 }
 
 .yui-gf div.first {
   width: 12.3%;
-}
+} */
