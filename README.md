@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### CV Generator clone - NextJS & MUI (inspired by www.open-resume.com/resume-builder)
 
-## Getting Started
+### About the App
 
-First, run the development server:
+CV Generator is a simple web application built using React.js and MUI (Material-UI) that allows users to create their CV (Curriculum Vitae) with different colors, fonts, and font-sizes and the option to download it as a PDF image file. You can check it out here: https://cv-generator-clone.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create and customize your CV.
+Choose from 12 different colors.
+Choose from 9 different Font Families.
+Preview your CV in Real-time.
+In second template (custom font size) you can set you font size.
+Export the CV as a PDF image file.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Clone this repository:
+git clone https://github.com/kristaps-m/cv_generator_clone.git
 
-## Learn More
+- More info [here:](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
-To learn more about Next.js, take a look at the following resources:
+### Navigate to the project directory:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+cd cv_generator_clone
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Install the required dependencies:
 
-## Deploy on Vercel
+`npm install`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Usage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To start the development server and run the application, use the following command:
+
+`npm run dev`
+
+The application is now available in your web browser at http://localhost:3000.
+
+### Exporting as PDF
+
+Once you have customized your CV, you can export it as a PDF file. Click on the "EXPORT TO PDF IMAGE" button. The PDF file will be downloaded to default download folder.
+
+### Improvements in future:
+
+- [ ] use different pdf generator, so that user can copy from pdf file.
+- [ ] improve Front End UI and visuals.
