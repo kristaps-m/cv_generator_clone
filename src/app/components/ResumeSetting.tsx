@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { Box, Input, InputLabel, Paper, Typography } from "@mui/material";
-import {
-  defaultColor,
-  defaultFonstSize,
-  grayBackgroundForBox,
-  whiteColor,
-} from "../constants";
+import { defaultColor, defaultFonstSize, whiteColor } from "../constants";
 import Grid from "@mui/material/Grid";
 
 interface IResumeSettingProps {
@@ -103,7 +98,6 @@ const ResumeSetting: React.FC<IResumeSettingProps> = ({
                 height: "45px",
                 backgroundColor: color,
                 borderRadius: "12px",
-                // padding: "2px",
                 margin: "2px 2px",
                 border: selectedColor === color ? "2px solid black" : "none",
               }}
@@ -145,7 +139,7 @@ const ResumeSetting: React.FC<IResumeSettingProps> = ({
                 marginBottom: 0,
               }}
             >
-              <Typography variant="h6">FontSize:</Typography>
+              <Typography variant="h6">Font Size [4-50]:</Typography>
             </InputLabel>
             <Input
               id="fullWidth"

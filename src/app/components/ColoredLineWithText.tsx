@@ -15,18 +15,28 @@ const ColoredLineWithText: React.FC<IColoredLineWithTextProps> = ({
   fontSizeNumber,
 }) => {
   return (
-    <span style={{ display: "flex", alignItems: "center" }}>
+    <span
+      style={{
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
       <Box
         sx={{
-          width: fontSizeNumber * 7,
-          height: fontSizeNumber * 0.7,
+          width: fontSizeNumber * 7, // aproximetly matches 'width' with font size
+          height: fontSizeNumber * 0.7, // aproximetly matches 'height' with font size
           backgroundColor: color,
           marginRight: "10px",
+          marginTop: "3px",
         }}
       ></Box>
       <Typography
         variant="h6"
-        style={{ fontFamily: selectedFont, fontSize: fontSizeNumber }}
+        style={{
+          fontFamily: selectedFont,
+          fontSize: fontSizeNumber,
+          lineHeight: "1",
+        }}
       >
         {text}
       </Typography>

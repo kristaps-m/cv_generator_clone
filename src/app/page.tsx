@@ -1,23 +1,16 @@
 "use client";
-// import axios from "axios";
-// import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import "@progress/kendo-theme-material/dist/all.css";
 import TemplateSelector from "./components/TemplateSelector";
 import React from "react";
-import { Box, Button, Grid, Paper } from "@mui/material";
+import { Box, Grid, Paper } from "@mui/material";
 import BasicInfo from "./components/BasicInfo";
 import WorkExperience from "./components/WorkExperience";
 import Education from "./components/Education";
 import Skills from "./components/Skills";
 import ResumeSetting from "./components/ResumeSetting";
 import { handleRemoveElement } from "./utils";
-import {
-  defaultFonstSize,
-  lightGrayBackground,
-  lightblueBackgroundAllBoxes,
-} from "./constants";
-import router, { useRouter } from "next/router";
+import { defaultFonstSize, lightGrayBackground } from "./constants";
 
 export default function Home() {
   const [cvData, setCvData] = React.useState({

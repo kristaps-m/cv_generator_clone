@@ -1,15 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-import { Icon } from "@progress/kendo-react-common";
-import styles from "../styles.module.css";
 import stylesCV from "./CVTemplate.module.css";
-import { Button } from "@progress/kendo-react-buttons";
-import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
-import Head from "next/head";
 import ITemplateProps from "./ITemplateProps";
-import { Box, Grid, Rating, Typography } from "@mui/material";
+import { Box, Button, Grid, Rating, Typography } from "@mui/material";
 import { defaultColor, defaultFonstSize } from "../constants";
 import ColoredLineWithText from "./ColoredLineWithText";
+import html2pdf from "html2pdf.js";
 
 const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
   const {
@@ -30,13 +26,6 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
     fontSizeNumber,
   } = data;
 
-  const pdfExportComponent = useRef(null);
-
-  const handleExportWithComponent = (event: any) => {
-    console.log("I clicked to export PDF");
-    pdfExportComponent.current.save();
-  };
-
   let colorFromResumeSetting =
     selectedColor === "" || selectedColor === null
       ? defaultColor
@@ -44,140 +33,160 @@ const TemplateA: React.FC<ITemplateProps> = ({ data }) => {
 
   const marginBottonValue = "5px";
 
+  // ---------------------------- pdf export as picture
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const pdfExportRef = useRef(null);
+
+  const handleExportToPDF = () => {
+    if (!isClient) {
+      return;
+    }
+
+    const element = pdfExportRef.current;
+    if (!element) return;
+
+    const opt = {
+      margin: 10,
+      filename: `${firstName}_${lastName}_cv.pdf`,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    };
+
+    import("html2pdf.js").then((html2pdfModule) => {
+      const html2pdf = html2pdfModule.default || html2pdfModule;
+      html2pdf().from(element).set(opt).save();
+    });
+  };
+
   return (
     <div>
-      <PDFExport ref={pdfExportComponent} paperSize="A4">
-        {/* Content of your CV */}
-        {/* A4-sized rectangle */}
+      <Button color="primary" onClick={handleExportToPDF}>
+        Export to PDF image
+      </Button>
+      {/* Content of your CV */}
+      {/* A4-sized rectangle */}
+      <div
+        style={{
+          border: "2px solid #000",
+          width: "210mm",
+          height: "297mm",
+          position: "relative",
+        }}
+      >
         <div
-          style={{
-            border: "2px solid #000",
-            width: "210mm",
-            height: "297mm",
-            position: "relative",
-          }}
+          // style={{
+          //   transform: "scale(0.8)", // Adjust the scale factor as needed
+          //   transformOrigin: "top left",
+          // }}
+          // className={styles.page}
+          ref={pdfExportRef}
         >
-          <div
-            style={{
-              transform: "scale(0.8)", // Adjust the scale factor as needed
-              transformOrigin: "top left",
+          <Box
+            sx={{
+              width: "100%",
+              height: 20,
+              backgroundColor: colorFromResumeSetting,
             }}
-            // className={styles.page}
-          >
-            <Box
-              sx={{
-                width: "100%",
-                height: 20,
-                backgroundColor: colorFromResumeSetting,
-              }}
-            ></Box>
-            <div className={stylesCV.cv} style={{ fontFamily: selectedFont }}>
-              <header className={stylesCV.cv_header}>
-                <h1>
-                  {firstName} {lastName}
-                </h1>
-                <p>{position}</p>
-                {/* TEST SELECTED FONT SIZE */}
-                <p>Font Size Number{fontSizeNumber}</p>
-                <p>Experience: {yearsOfExperience} years</p>
-              </header>
-              <section className={stylesCV.cv_section}>
-                <ColoredLineWithText
-                  color={colorFromResumeSetting}
-                  text="Personal Information:"
-                  selectedFont={selectedFont}
-                  fontSizeNumber={defaultFonstSize}
-                />
-                <div className={stylesCV.workItem}>
-                  <span>Phone:</span> <span>{phone}</span>
-                </div>
-                <div className={stylesCV.workItem}>
-                  <span>Email:</span> <span>{email}</span>
-                </div>
-                <div className={stylesCV.workItem}>
-                  <span>LinkedIn:</span> <span>{linkedIn}</span>
-                </div>
-                <div className={stylesCV.workItem}>
-                  <span>Location:</span> <span>{location}</span>
-                </div>
-              </section>
-              <section className={stylesCV.cv_section}>
-                <ColoredLineWithText
-                  color={colorFromResumeSetting}
-                  text="WORK EXPERIENCE:"
-                  selectedFont={selectedFont}
-                  fontSizeNumber={defaultFonstSize}
-                />
-                <div className={stylesCV.workItem}>
-                  {workExperiences.map((experience, index) => (
-                    <div
-                      key={index}
-                      style={{ marginBottom: marginBottonValue }}
-                    >
-                      <p
-                        style={{ fontWeight: "bolder" }}
-                      >{`Company: ${experience.company}`}</p>
-                      <p>{`Job Title: ${experience.jobTitle}`}</p>
-                      <p>{`Date: ${experience.date}`}</p>
-                      <p>{`Description: ${experience.description}`}</p>
-                    </div>
+          ></Box>
+          <div className={stylesCV.cv} style={{ fontFamily: selectedFont }}>
+            <header className={stylesCV.cv_header}>
+              <h1>
+                {firstName} {lastName}
+              </h1>
+              <p>{position}</p>
+              <p>Experience: {yearsOfExperience} years</p>
+            </header>
+            <section className={stylesCV.cv_section}>
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="Personal Information:"
+                selectedFont={selectedFont}
+                fontSizeNumber={defaultFonstSize}
+              />
+              <div className={stylesCV.workItem}>
+                <span>Phone:</span> <span>{phone}</span>
+              </div>
+              <div className={stylesCV.workItem}>
+                <span>Email:</span> <span>{email}</span>
+              </div>
+              <div className={stylesCV.workItem}>
+                <span>LinkedIn:</span> <span>{linkedIn}</span>
+              </div>
+              <div className={stylesCV.workItem}>
+                <span>Location:</span> <span>{location}</span>
+              </div>
+            </section>
+            <section className={stylesCV.cv_section}>
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="WORK EXPERIENCE:"
+                selectedFont={selectedFont}
+                fontSizeNumber={defaultFonstSize}
+              />
+              <div className={stylesCV.workItem}>
+                {workExperiences.map((experience, index) => (
+                  <div key={index} style={{ marginBottom: marginBottonValue }}>
+                    <p
+                      style={{ fontWeight: "bolder" }}
+                    >{`Company: ${experience.company}`}</p>
+                    <p>{`Job Title: ${experience.jobTitle}`}</p>
+                    <p>{`Date: ${experience.date}`}</p>
+                    <p>{`Description: ${experience.description}`}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section className={stylesCV.cv_section}>
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="EDUCATION:"
+                selectedFont={selectedFont}
+                fontSizeNumber={defaultFonstSize}
+              />
+              <div className={stylesCV.workItem}>
+                {educations.map((experience, index) => (
+                  <div key={index} style={{ marginBottom: marginBottonValue }}>
+                    <p
+                      style={{ fontWeight: "bolder" }}
+                    >{`Scool: ${experience.school}`}</p>
+                    <p>{`Degree And Major: ${experience.degreeAndMajor}`}</p>
+                    <p>{`Date: ${experience.schoolDate}`}</p>
+                    <p>{`Achievements: ${experience.achievements}`}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section className={stylesCV.cv_section}>
+              <ColoredLineWithText
+                color={colorFromResumeSetting}
+                text="SKILLS:"
+                selectedFont={selectedFont}
+                fontSizeNumber={defaultFonstSize}
+              />
+              <div className={stylesCV.workItem}>
+                <Grid container spacing={2}>
+                  {skills.map((skill, index) => (
+                    <Grid key={index} item xs={4}>
+                      <p>{skill.name}</p>
+                      <Rating
+                        name="read-only"
+                        value={skill.strength}
+                        readOnly
+                      />
+                    </Grid>
                   ))}
-                </div>
-              </section>
-              <section className={stylesCV.cv_section}>
-                <ColoredLineWithText
-                  color={colorFromResumeSetting}
-                  text="EDUCATION:"
-                  selectedFont={selectedFont}
-                  fontSizeNumber={defaultFonstSize}
-                />
-                <div className={stylesCV.workItem}>
-                  {educations.map((experience, index) => (
-                    <div
-                      key={index}
-                      style={{ marginBottom: marginBottonValue }}
-                    >
-                      <p
-                        style={{ fontWeight: "bolder" }}
-                      >{`Scool: ${experience.school}`}</p>
-                      <p>{`Degree And Major: ${experience.degreeAndMajor}`}</p>
-                      <p>{`Date: ${experience.schoolDate}`}</p>
-                      <p>{`Achievements: ${experience.achievements}`}</p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-              <section className={stylesCV.cv_section}>
-                <ColoredLineWithText
-                  color={colorFromResumeSetting}
-                  text="SKILLS:"
-                  selectedFont={selectedFont}
-                  fontSizeNumber={defaultFonstSize}
-                />
-                <div className={stylesCV.workItem}>
-                  <Grid container spacing={2}>
-                    {skills.map((skill, index) => (
-                      <Grid key={index} item xs={4}>
-                        <p>{skill.name}</p>
-                        <Rating
-                          name="read-only"
-                          value={skill.strength}
-                          readOnly
-                        />
-                      </Grid>
-                    ))}
-                  </Grid>
-                </div>
-              </section>
-            </div>
+                </Grid>
+              </div>
+            </section>
           </div>
         </div>
-      </PDFExport>
-
-      <div className="button-area">
-        <Button themeColor={"primary"} onClick={handleExportWithComponent}>
-          Save as PDF
-        </Button>
       </div>
     </div>
   );

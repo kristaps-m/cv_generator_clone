@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import stylesCV from "./CVTemplate.module.css";
-import { Button } from "@progress/kendo-react-buttons";
-import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import ITemplateProps from "./ITemplateProps";
-import { Box, Grid, Rating, Typography } from "@mui/material";
+import { Box, Button, Grid, Rating } from "@mui/material";
 import { defaultColor } from "../constants";
 import ColoredLineWithText from "./ColoredLineWithText";
+import html2pdf from "html2pdf.js";
 
 const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
   const {
@@ -27,13 +26,6 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
     fontSizeNumber,
   } = data;
 
-  const pdfExportComponent = useRef(null);
-
-  const handleExportWithComponent = (event: any) => {
-    console.log("I clicked to export PDF");
-    pdfExportComponent.current.save();
-  };
-
   let colorFromResumeSetting =
     selectedColor === "" || selectedColor === null
       ? defaultColor
@@ -44,29 +36,62 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
   const maxMinNumber = (n: number) => {
     if (n < 4) {
       return 4;
-    } else if (n > 35) {
-      return 35;
+    } else if (n > 50) {
+      return 50;
     } else {
       return n;
     }
   };
 
-  let test = maxMinNumber(fontSizeNumber);
-  //fontSizeNumber = maxMinNumber(fontSizeNumber);
+  let fonstSizeMinAndMaxValueCheck = maxMinNumber(fontSizeNumber);
+
+  // ---------------------------- pdf export as picture
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const pdfExportRef = useRef(null);
+
+  const handleExportToPDF = () => {
+    if (!isClient) {
+      return;
+    }
+
+    const element = pdfExportRef.current;
+    if (!element) return;
+
+    const opt = {
+      margin: 10,
+      filename: `${firstName}_${lastName}_cv.pdf`,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    };
+
+    import("html2pdf.js").then((html2pdfModule) => {
+      const html2pdf = html2pdfModule.default || html2pdfModule;
+      html2pdf().from(element).set(opt).save();
+    });
+  };
 
   return (
     <div>
-      <PDFExport ref={pdfExportComponent} paperSize="A4">
-        {/* A4-sized rectangle */}
-        <div
-          style={{
-            border: "2px solid #000",
-            width: "210mm",
-            height: "297mm",
-            position: "relative",
-          }}
-          // className={styles.page}
-        >
+      <Button color="primary" onClick={handleExportToPDF}>
+        Export to PDF image
+      </Button>
+      {/* A4-sized rectangle */}
+      <div
+        style={{
+          border: "2px solid #000",
+          width: "210mm",
+          height: "297mm",
+          position: "relative",
+        }}
+      >
+        <div ref={pdfExportRef}>
           <Box
             sx={{
               width: "100%",
@@ -74,32 +99,29 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
               backgroundColor: colorFromResumeSetting,
             }}
           ></Box>
-          <div>
-            <h1 style={{ fontSize: test }}>XXX</h1>
-          </div>
           <div
-            // className={[stylesCV.cv, stylesCV.fontSizeSmall].join(" ")}
             className={stylesCV.cv}
-            style={{ fontFamily: selectedFont, fontSize: fontSizeNumber }}
+            style={{
+              fontFamily: selectedFont,
+              fontSize: fonstSizeMinAndMaxValueCheck,
+            }}
           >
             <header
               className={[stylesCV.fontSizeSmallHeader].join(" ")}
-              style={{ fontSize: fontSizeNumber + 4 }}
+              style={{ fontSize: fonstSizeMinAndMaxValueCheck + 4 }}
             >
               <h1>
                 {firstName} {lastName}
               </h1>
               <p>{position}</p>
-              <p>
-                <b>-B-</b>Experience: {yearsOfExperience} years
-              </p>
+              <p>Experience: {yearsOfExperience} years</p>
             </header>
             <section className={stylesCV.cv_section}>
               <ColoredLineWithText
                 color={colorFromResumeSetting}
                 text="Personal Information:"
                 selectedFont={selectedFont}
-                fontSizeNumber={fontSizeNumber}
+                fontSizeNumber={fonstSizeMinAndMaxValueCheck}
               />
               <div className={stylesCV.workItem}>
                 <span>Phone:</span> <span>{phone}</span>
@@ -119,7 +141,7 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
                 color={colorFromResumeSetting}
                 text="WORK EXPERIENCE:"
                 selectedFont={selectedFont}
-                fontSizeNumber={fontSizeNumber}
+                fontSizeNumber={fonstSizeMinAndMaxValueCheck}
               />
               <div className={stylesCV.workItem}>
                 {workExperiences.map((experience, index) => (
@@ -139,7 +161,7 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
                 color={colorFromResumeSetting}
                 text="EDUCATION:"
                 selectedFont={selectedFont}
-                fontSizeNumber={fontSizeNumber}
+                fontSizeNumber={fonstSizeMinAndMaxValueCheck}
               />
               <div className={stylesCV.workItem}>
                 {educations.map((experience, index) => (
@@ -159,7 +181,7 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
                 color={colorFromResumeSetting}
                 text="SKILLS:"
                 selectedFont={selectedFont}
-                fontSizeNumber={fontSizeNumber}
+                fontSizeNumber={fonstSizeMinAndMaxValueCheck}
               />
               <div className={stylesCV.workItem}>
                 <Grid container spacing={2}>
@@ -170,8 +192,7 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
                         name="read-only"
                         value={skill.strength}
                         readOnly
-                        // className={stylesCV.fontSizeSmallHeader}
-                        style={{ fontSize: fontSizeNumber }}
+                        style={{ fontSize: fonstSizeMinAndMaxValueCheck }}
                       />
                     </Grid>
                   ))}
@@ -180,11 +201,6 @@ const TemplateB: React.FC<ITemplateProps> = ({ data }) => {
             </section>
           </div>
         </div>
-      </PDFExport>
-      <div className="button-area">
-        <Button themeColor={"primary"} onClick={handleExportWithComponent}>
-          Save as PDF
-        </Button>
       </div>
     </div>
   );
